@@ -4,7 +4,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+builder.Services.AddCors(options => options.AddPolicy(name: "AllowAngular",
+                policy =>
+                {
+                    policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
+                }));
+
 var app = builder.Build();
+
+app.UseCors("AllowAngular");
 
 // Configure the HTTP request pipeline.
 
