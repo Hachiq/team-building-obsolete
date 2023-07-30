@@ -1,6 +1,15 @@
+using Api.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
+var identityConnectionString = builder.Configuration.
+    GetConnectionString("AppIdentityDbContextConnection")
+    ?? throw new InvalidOperationException("Connection string 'AppIdentityDbContextConnection' not found.");
+
 // Add services to the container.
+
+builder.Services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(identityConnectionString));
 
 builder.Services.AddControllers();
 
