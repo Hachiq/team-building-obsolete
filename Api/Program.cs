@@ -1,4 +1,5 @@
 using Api.Data;
+using Api.Services.UserService;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,8 @@ var identityConnectionString = builder.Configuration.
 // Add services to the container.
 
 builder.Services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(identityConnectionString));
+
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddControllers();
 
