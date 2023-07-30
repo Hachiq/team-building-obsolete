@@ -1,5 +1,6 @@
 ﻿using Api.DTOs;
 using Api.Models;
+using Api.Services.UserService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -13,30 +14,44 @@ namespace Api.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        public static User user = new User();
-
         private readonly IConfiguration _configuration;
-        public AuthController(IConfiguration configuration)
+        private readonly IUserService _userService;
+        public AuthController(IConfiguration configuration, IUserService userService)
         {
             _configuration = configuration;
+            _userService = userService;
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(UserDto request)
+        public async Task<ActionResult> Register(UserDto request)
         {
+            if (!_userService.IsUsernameUnique(request) || !_userService.IsEmailUnique(request))
+            {
+                return BadRequest($"User {request.Username} already exists"); // Should be updated (username OR email exists).
+            }
+
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
-            user.Username = request.Username;
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
+            var newUser = new User
+            {
+                Username = request.Username,
+                Email = request.Email,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                RoleId = request.IsChief ? 2 : 1
+            };
 
-            return Ok(user);
+            await _userService.AddUserAsync(newUser);
+            return Ok();
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(UserDto request)
+        public async Task<ActionResult<string>> Login(LoginDto request)
         {
-            if (user.Username != request.Username)
+            var user = await _userService.GetUserByUsernameAsync(request.Username);
+            if (user == null)
             {
                 return BadRequest("User not found.");
             }
@@ -54,7 +69,7 @@ namespace Api.Controllers
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Username),
-                new Claim(ClaimTypes.Role, "Admin")
+                new Claim(ClaimTypes.Role, _userService.GetUserRole(user))
             };
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
