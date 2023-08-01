@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginDto } from 'src/app/models/loginDto';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -10,11 +11,13 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent {
   user = new LoginDto();
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+    private router: Router) { }
 
   login() {
     this.authService.login(this.user).subscribe((token: string) => {
       localStorage.setItem('authToken', token);
+      this.router.navigate(['home']);
     });
   }
 }

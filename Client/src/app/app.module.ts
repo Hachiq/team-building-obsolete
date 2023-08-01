@@ -11,6 +11,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { AuthInterceptorService } from './services/auth.interceptor.service';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { HeaderComponent } from './components/header/header.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
