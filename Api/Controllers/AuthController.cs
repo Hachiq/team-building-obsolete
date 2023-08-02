@@ -51,13 +51,9 @@ namespace Api.Controllers
         public async Task<ActionResult<string>> Login(LoginDto request)
         {
             var user = await _userService.GetUserByUsernameAsync(request.Username);
-            if (user == null)
+            if (user == null || !VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
             {
-                return BadRequest("User not found.");
-            }
-            if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
-            {
-                return BadRequest("Wrong password");
+                return BadRequest("User not found or wrong password.");
             }
 
             string token = CreateToken(user);

@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent {
   user = new LoginDto();
+  errorMessage: string = '';
 
   constructor(private authService: AuthService,
     private router: Router) { }
@@ -18,6 +19,13 @@ export class LoginComponent {
     this.authService.login(this.user).subscribe((token: string) => {
       localStorage.setItem('authToken', token);
       this.router.navigate(['home']);
+    }, (error) => {
+      if (error.status === 400){
+        this.errorMessage = error.error;
+      }
+      else {
+        this.errorMessage = 'Undefined error. Please, try again later.'
+      }
     });
   }
 }

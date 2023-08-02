@@ -10,13 +10,24 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class RegisterComponent {
   user = new User();
+  errorMessage: string = '';
 
   constructor(private authService: AuthService,
     private router: Router) { }
 
   register(){
-    this.authService.register(this.user).subscribe();
-    this.router.navigate(['login']);
+    this.authService.register(this.user).subscribe(() => {
+      console.log('Success');
+    },
+    (error) => {
+      if (error.status === 400){
+        this.errorMessage = error.error;
+      }
+      else {
+        this.errorMessage = 'Undefined error. Please, try again later.'
+      }
+    });
+    //this.router.navigate(['login']);
   }
 
 }
