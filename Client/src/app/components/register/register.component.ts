@@ -18,6 +18,7 @@ export class RegisterComponent {
   register(){
     this.authService.register(this.user).subscribe(() => {
       console.log('Success');
+      this.router.navigate(['login']);
     },
     (error) => {
       if (error.status === 400){
@@ -27,7 +28,6 @@ export class RegisterComponent {
         this.errorMessage = 'Undefined error. Please, try again later.'
       }
     });
-    //this.router.navigate(['login']);
   }
 
 }

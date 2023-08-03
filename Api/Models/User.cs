@@ -13,5 +13,7 @@ namespace Api.Models
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public int RoleId { get; set; }
+        public int? TeamId { get; set; }
+        public Team? Team { get; set; }
     }
 }

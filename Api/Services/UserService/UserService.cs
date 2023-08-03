@@ -7,9 +7,9 @@ namespace Api.Services.UserService
 {
     public class UserService : IUserService
     {
-        private readonly AppIdentityDbContext _db;
+        private readonly AppDbContext _db;
 
-        public UserService(AppIdentityDbContext db)
+        public UserService(AppDbContext db)
         {
             _db = db;
         }

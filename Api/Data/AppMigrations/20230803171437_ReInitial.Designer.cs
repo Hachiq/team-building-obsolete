@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Api.Data.AppIdentityMigrations
+namespace Api.Data.AppMigrations
 {
-    [DbContext(typeof(AppIdentityDbContext))]
-    [Migration("20230730073906_Initial")]
-    partial class Initial
+    [DbContext(typeof(AppDbContext))]
+    [Migration("20230803171437_ReInitial")]
+    partial class ReInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,14 +36,26 @@ namespace Api.Data.AppIdentityMigrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("Api.Models.Team", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Roles");
+                    b.ToTable("Teams");
                 });
 
             modelBuilder.Entity("Api.Models.User", b =>
@@ -74,25 +86,35 @@ namespace Api.Data.AppIdentityMigrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TeamId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
-                });
+                    b.HasIndex("TeamId");
 
-            modelBuilder.Entity("Api.Models.Role", b =>
-                {
-                    b.HasOne("Api.Models.User", null)
-                        .WithMany("Roles")
-                        .HasForeignKey("UserId");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Api.Models.User", b =>
                 {
-                    b.Navigation("Roles");
+                    b.HasOne("Api.Models.Team", "Team")
+                        .WithMany("Users")
+                        .HasForeignKey("TeamId");
+
+                    b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("Api.Models.Team", b =>
+                {
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

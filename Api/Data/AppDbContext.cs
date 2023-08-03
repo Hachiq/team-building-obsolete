@@ -3,11 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Api.Data
 {
-    public class AppIdentityDbContext : DbContext
+    public class AppDbContext : DbContext
     {
-        public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) : base(options) { }
-        
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+
         public DbSet<User> Users => Set<User>();
         public DbSet<Role> Roles => Set<Role>();
+        public DbSet<Team> Teams => Set<Team>();
     }
 }
