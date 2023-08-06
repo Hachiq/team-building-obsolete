@@ -22,8 +22,8 @@ namespace Api.Controllers
             return Ok(await _teamService.GetTeamsAsync());
         }
 
-        [HttpPost("create")]
-        public async Task<ActionResult> Create(Team team)
+        [HttpPost("add")]
+        public async Task<ActionResult> Add(Team team)
         {
             await _teamService.AddTeamAsync(team);
             return Ok();

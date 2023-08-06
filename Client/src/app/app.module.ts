@@ -12,6 +12,8 @@ import { AuthInterceptorService } from './services/auth.interceptor.service';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { NewTeamItemComponent } from './components/new-team-item/new-team-item.component';
+import { TeamFormComponent } from './components/team-form/team-form.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { LogoutComponent } from './components/logout/logout.component';
     RegisterComponent,
     HomeComponent,
     HeaderComponent,
-    LogoutComponent
+    LogoutComponent,
+    NewTeamItemComponent,
+    TeamFormComponent
   ],
   imports: [
     BrowserModule,
