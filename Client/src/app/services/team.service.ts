@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Team } from '../models/team';
 import { Observable } from 'rxjs/internal/Observable';
 import { TeamRequest } from '../models/teamRequest';
+import { Team } from '../models/team';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,12 @@ import { TeamRequest } from '../models/teamRequest';
 export class TeamService {
 
   constructor(private http: HttpClient) { }
+
+  public getTeams() : Observable<Team[]>{
+    return this.http.get<Team[]>(
+      'https://localhost:7152/api/Team/get'
+    )
+  }
 
   public create(request: TeamRequest): Observable<any> {
     return this.http.post<any>(

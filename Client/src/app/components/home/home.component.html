@@ -1,1 +1,22 @@
-<p>home works!</p>
+<div style="margin: auto; width: 200px; margin-top: 40px;">
+    <h3>
+        Join the team!
+    </h3>
+</div>
+<div style="width: 700px; margin-top: 30px; margin-left: 100px;">
+    <table class="table table-striped table-bordered" style="margin-top: 20px;">
+        <caption>List of available teams</caption>
+        <thead class="table-dark">
+            <tr>
+                <th scope="col" style="min-width: 50px;">#</th>
+                <th scope="col">Team</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let team of teams; let i = index">
+              <th scope="row">{{ getDisplayNumber(i) }}</th>
+              <td>{{ team.name }}</td>
+            </tr>
+          </tbody>
+    </table>
+</div>
