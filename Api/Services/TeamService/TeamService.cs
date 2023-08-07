@@ -23,6 +23,5 @@ namespace Api.Services.TeamService
             await _db.Teams.AddAsync(team);
             await _db.SaveChangesAsync();
         }
-
     }
 }

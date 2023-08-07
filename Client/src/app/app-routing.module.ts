@@ -4,13 +4,15 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { TeamFormComponent } from './components/team-form/team-form.component';
+import { TeamPanelComponent } from './components/team-panel/team-panel.component';
 
 const routes: Routes = [
   { path: '',   redirectTo: 'login', pathMatch: 'full' },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "home", component: HomeComponent },
-  { path: "new", component: TeamFormComponent}
+  { path: "new", component: TeamFormComponent},
+  { path: "panel", component: TeamPanelComponent}
 ];
 
 @NgModule({

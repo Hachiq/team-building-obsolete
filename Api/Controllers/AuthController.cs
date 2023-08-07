@@ -50,7 +50,7 @@ namespace Api.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<string>> Login(LoginDto request)
         {
-            var user = await _userService.GetUserByUsernameAsync(request.Username);
+            var user = _userService.GetUserByUsername(request.Username);
             if (user == null || !VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
             {
                 return BadRequest("User not found or wrong password.");

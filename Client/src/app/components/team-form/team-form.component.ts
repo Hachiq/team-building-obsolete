@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Team } from 'src/app/models/team';
+import { TeamRequest } from 'src/app/models/teamRequest';
 import { TeamService } from 'src/app/services/team.service';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-team-form',
@@ -9,16 +11,18 @@ import { TeamService } from 'src/app/services/team.service';
   styleUrls: ['./team-form.component.scss']
 })
 export class TeamFormComponent {
-  team = new Team();
+  request = new TeamRequest();
   errorMessage: string = '';
 
   constructor(private teamService: TeamService, 
-    private router: Router){}
+    private router: Router,
+    private tokenService: TokenService){}
 
     create(){
-      this.teamService.create(this.team).subscribe(() => {
+      this.request.user = this.tokenService.getUsernameFromToken();
+      this.teamService.create(this.request).subscribe(() => {
         console.log('Success');
-        this.router.navigate(['home']);
+        this.router.navigate(['panel']);
       },
       (error) => {
         if (error.status === 400){

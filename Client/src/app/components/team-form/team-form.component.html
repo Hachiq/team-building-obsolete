@@ -7,10 +7,12 @@
         </div>
         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
           <form>
+
+            <div class="text-danger" *ngIf="errorMessage"><h5>{{ errorMessage }}</h5></div>
   
             <!-- Name input -->
             <div class="form-outline mb-4">
-              <input type="text" [(ngModel)]="team.name" name="username" class="form-control form-control-lg" placeholder="Enter the name of the team" />
+              <input type="text" [(ngModel)]="request.team" name="team" class="form-control form-control-lg" placeholder="Enter the name of the team" />
             </div>
   
             <div class="text-center text-lg-start mt-4 pt-2">

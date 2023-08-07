@@ -17,9 +17,9 @@ namespace Api.Services.UserService
         {
             return await _db.Users.ToListAsync();
         }
-        public async Task<User> GetUserByUsernameAsync(string username)
+        public User GetUserByUsername(string username)
         {
-            User user = await _db.Users.FirstOrDefaultAsync(u => u.Username == username);
+            User user = _db.Users.FirstOrDefault(u => u.Username == username);
             return user;
         }
         public string GetUserRole(User user)

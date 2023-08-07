@@ -1,5 +1,7 @@
-﻿using Api.Models;
+﻿using Api.DTOs;
+using Api.Models;
 using Api.Services.TeamService;
+using Api.Services.UserService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,10 +12,12 @@ namespace Api.Controllers
     public class TeamController : ControllerBase
     {
         private readonly ITeamService _teamService;
+        private readonly IUserService _userService;
 
-        public TeamController(ITeamService teamService)
+        public TeamController(ITeamService teamService, IUserService userService)
         {
             _teamService = teamService;
+            _userService = userService;
         }
 
         [HttpGet("get")]
@@ -23,9 +27,13 @@ namespace Api.Controllers
         }
 
         [HttpPost("add")]
-        public async Task<ActionResult> Add(Team team)
+        public async Task<ActionResult> Add(TeamDto request)
         {
-            await _teamService.AddTeamAsync(team);
+            await _teamService.AddTeamAsync(new Team
+            {
+                Name = request.Team,
+                Users = new List<User> { _userService.GetUserByUsername(request.User) }
+            });
             return Ok();
         }
     }

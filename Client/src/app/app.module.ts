@@ -14,6 +14,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { NewTeamItemComponent } from './components/new-team-item/new-team-item.component';
 import { TeamFormComponent } from './components/team-form/team-form.component';
+import { TeamPanelComponent } from './components/team-panel/team-panel.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { TeamFormComponent } from './components/team-form/team-form.component';
     HeaderComponent,
     LogoutComponent,
     NewTeamItemComponent,
-    TeamFormComponent
+    TeamFormComponent,
+    TeamPanelComponent
   ],
   imports: [
     BrowserModule,
