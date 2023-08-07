@@ -34,7 +34,6 @@ export class TokenService {
   
       return userRoles && userRoles.includes(role);
     } catch (error) {
-      console.error('Error decoding JWT:', error);
       return false; // Return false on error (invalid token, decoding error, etc.)
     }
   }
