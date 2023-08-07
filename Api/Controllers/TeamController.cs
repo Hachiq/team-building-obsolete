@@ -29,10 +29,15 @@ namespace Api.Controllers
         [HttpPost("add")]
         public async Task<ActionResult> Add(TeamDto request)
         {
+            var user = _userService.GetUserByUsername(request.User);
+            if (user == null || user.TeamId is not null) 
+            {
+                return BadRequest("Something went wrong. Make sure you are not a member of a team already");
+            }
             await _teamService.AddTeamAsync(new Team
             {
                 Name = request.Team,
-                Users = new List<User> { _userService.GetUserByUsername(request.User) }
+                Users = new List<User> { user }
             });
             return Ok();
         }
