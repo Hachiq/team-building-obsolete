@@ -41,5 +41,22 @@ namespace Api.Controllers
             });
             return Ok();
         }
+
+        [HttpPut("join")]
+        public async Task<ActionResult> Join(TeamDto request)
+        {
+            var team = _teamService.GetTeamByTeamNameAsync(request.Team);
+            if (team == null)
+            {
+                return BadRequest("Something went wrong. It seems, this team does not exist");
+            }
+            var user = _userService.GetUserByUsername(request.User);
+            if (user == null || user.TeamId is not null)
+            {
+                return BadRequest("Something went wrong. Make sure you are not a member of a team already.");
+            }
+            await _teamService.AddTeamMemberAsync(team, user);
+            return Ok();
+        }
     }
 }

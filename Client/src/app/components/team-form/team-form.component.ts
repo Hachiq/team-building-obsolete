@@ -20,16 +20,17 @@ export class TeamFormComponent {
     create(){
       this.request.user = this.tokenService.getUsernameFromToken();
       this.teamService.create(this.request).subscribe(() => {
-        console.log('Success');
-        this.router.navigate(['panel']);
-      },
-      (error) => {
-        if (error.status === 400){
-          this.errorMessage = error.error;
+          console.log('Success');
+          this.router.navigate(['panel']);
+        },
+        (error) => {
+          if (error.status === 400){
+            this.errorMessage = error.error;
+          }
+          else {
+            this.errorMessage = 'Undefined error. Please, try again later.'
+          }
         }
-        else {
-          this.errorMessage = 'Undefined error. Please, try again later.'
-        }
-      });
+      );
     }
 }

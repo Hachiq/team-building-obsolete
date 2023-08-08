@@ -23,4 +23,11 @@ export class TeamService {
       request
     );
   }
+
+  public join(request: TeamRequest): Observable<any> {
+    return this.http.put<any>(
+      'https://localhost:7152/api/Team/join', 
+      request
+    )
+  }
 }
