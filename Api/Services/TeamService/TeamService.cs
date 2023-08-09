@@ -36,5 +36,10 @@ namespace Api.Services.TeamService
             Team team = _db.Teams.FirstOrDefault(u => u.Name == teamName);
             return team;
         }
+
+        public async Task<Team> GetTeamByUserAsync(User user)
+        {
+            return await _db.Teams.FirstOrDefaultAsync(t => t.Id == user.TeamId);
+        }
     }
 }

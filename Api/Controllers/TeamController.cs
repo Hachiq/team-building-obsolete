@@ -58,5 +58,12 @@ namespace Api.Controllers
             await _teamService.AddTeamMemberAsync(team, user);
             return Ok();
         }
+
+        [HttpGet("single/{username}")]
+        public async Task<ActionResult<Team>> GetTeamByUser(string username)
+        {
+            var user = _userService.GetUserByUsername(username);
+            return Ok(await _teamService.GetTeamByUserAsync(user));
+        }
     }
 }

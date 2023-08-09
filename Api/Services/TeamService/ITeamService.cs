@@ -9,5 +9,6 @@ namespace Api.Services.TeamService
         Task AddTeamAsync(Team team);
         Task AddTeamMemberAsync(Team team, User user);
         Team GetTeamByTeamNameAsync(string teamName);
+        Task<Team> GetTeamByUserAsync(User user);
     }
 }

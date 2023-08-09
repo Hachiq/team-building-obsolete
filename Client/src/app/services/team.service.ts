@@ -17,6 +17,12 @@ export class TeamService {
     )
   }
 
+  public getTeam(username: string) : Observable<Team>{
+    return this.http.get<Team>(
+      `https://localhost:7152/api/Team/single/${username}`
+    )
+  }
+
   public create(request: TeamRequest): Observable<any> {
     return this.http.post<any>(
       'https://localhost:7152/api/Team/add',
