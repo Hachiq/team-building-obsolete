@@ -3,6 +3,7 @@ using Api.Models;
 using Api.Services.TeamService;
 using Api.Services.UserService;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch.Internal;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -64,6 +65,16 @@ namespace Api.Controllers
         {
             var user = _userService.GetUserByUsername(username);
             return Ok(await _teamService.GetTeamByUserAsync(user));
+        }
+
+        [HttpGet("members/{teamId}")]
+        public async Task<ActionResult<List<User>>> GetTeamMemtbers(int teamId)
+        {
+            if (teamId is 0)
+            {
+                return NotFound("No such team exists");
+            }
+            return Ok(await _teamService.GetTeamMembersAsync(teamId));
         }
     }
 }

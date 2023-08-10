@@ -67,6 +67,10 @@ namespace Api.Controllers
                 new Claim(ClaimTypes.Name, user.Username),
                 new Claim(ClaimTypes.Role, _userService.GetUserRole(user))
             };
+            if (user.TeamId is not null)
+            {
+                claims.Add(new Claim("TeamId", user.TeamId.ToString()));
+            }
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
                 _configuration.GetSection("AppSettings:Token").Value));

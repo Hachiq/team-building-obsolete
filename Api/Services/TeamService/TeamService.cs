@@ -15,7 +15,7 @@ namespace Api.Services.TeamService
 
         public async Task<IEnumerable<Team>> GetTeamsAsync()
         {
-            return await _db.Teams.ToListAsync();
+            return await _db.Teams.Include(t => t.Users).ToListAsync();
         }
 
         public async Task AddTeamAsync(Team team)
@@ -31,6 +31,12 @@ namespace Api.Services.TeamService
             await _db.SaveChangesAsync();
         }
 
+        public async Task<List<User>> GetTeamMembersAsync(int teamId)
+        {
+            Team team = _db.Teams.Include(t => t.Users).FirstOrDefault(u => u.Id == teamId);
+            return team.Users.ToList();
+        }
+
         public Team GetTeamByTeamNameAsync(string teamName)
         {
             Team team = _db.Teams.FirstOrDefault(u => u.Name == teamName);
@@ -39,7 +45,7 @@ namespace Api.Services.TeamService
 
         public async Task<Team> GetTeamByUserAsync(User user)
         {
-            return await _db.Teams.FirstOrDefaultAsync(t => t.Id == user.TeamId);
+            return await _db.Teams.Include(t => t.Users).FirstOrDefaultAsync(t => t.Id == user.TeamId);
         }
     }
 }

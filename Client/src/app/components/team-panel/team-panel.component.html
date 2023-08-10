@@ -1,1 +1,24 @@
 <h2>Your team is {{ team.name }} with id {{ team.id }}</h2>
+
+<div style="width: 700px; margin-top: 30px; margin-left: 100px;">
+    
+    <table class="table table-striped table-bordered" style="margin-top: 20px;">
+        <caption>Your teammates</caption>
+        <thead class="table-dark">
+            <tr>
+                <th scope="col" style="min-width: 50px;">#</th>
+                <th scope="col">First name</th>
+                <th scope="col">Last name</th>
+                <th scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let member of members; let i = index">
+              <th scope="row">{{ getDisplayNumber(i) }}</th>
+              <td>{{ member.firstName }}</td>
+              <td>{{ member.lastName }}</td>
+              <td>{{ member.email }}</td>
+            </tr>
+          </tbody>
+    </table>
+</div>

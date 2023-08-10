@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { TeamRequest } from '../models/teamRequest';
 import { Team } from '../models/team';
+import { Member } from '../models/member';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +23,20 @@ export class TeamService {
     return this.http.get<Team>(
       `https://localhost:7152/api/Team/single/${username}`
     )
+  }
+
+  public getMembers(teamId: number) : Observable<Member[]>{
+    return this.http.get<Member[]>(
+      `https://localhost:7152/api/Team/members/${teamId}`
+    ).pipe(map(
+      users => users.map(
+        user => ({
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email
+        })
+      )
+    ))
   }
 
   public create(request: TeamRequest): Observable<any> {

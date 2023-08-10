@@ -37,6 +37,9 @@
               <li *ngIf="!tokenExists()" class="nav-item">
                   <a class="nav-link" routerLink="register">Register</a>
               </li>
+              <li *ngIf="tokenExists()" class="nav-item">
+                <a class="nav-link" routerLink="panel">My team</a>
+              </li>
               <app-logout *ngIf="tokenExists()"></app-logout>
             </ul>
         </div>

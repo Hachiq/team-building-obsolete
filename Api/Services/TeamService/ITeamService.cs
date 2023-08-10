@@ -8,6 +8,7 @@ namespace Api.Services.TeamService
         Task<IEnumerable<Team>> GetTeamsAsync();
         Task AddTeamAsync(Team team);
         Task AddTeamMemberAsync(Team team, User user);
+        Task<List<User>> GetTeamMembersAsync(int teamId);
         Team GetTeamByTeamNameAsync(string teamName);
         Task<Team> GetTeamByUserAsync(User user);
     }

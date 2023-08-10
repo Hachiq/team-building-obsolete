@@ -26,6 +26,15 @@ export class TokenService {
     return '';
   }
 
+  public getTeamIdFromToken(): number {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      const decodedToken = jwtDecode<any>(token);
+      return parseInt(decodedToken['TeamId'], 10);
+    }
+    return 0;
+  }
+
   public userIsInRole(role: string): boolean{
     const token: any = localStorage.getItem('authToken');
     try {

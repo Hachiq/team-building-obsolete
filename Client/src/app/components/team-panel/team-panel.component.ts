@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Member } from 'src/app/models/member';
 import { Team } from 'src/app/models/team';
 import { TeamService } from 'src/app/services/team.service';
 import { TokenService } from 'src/app/services/token.service';
@@ -10,17 +11,31 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class TeamPanelComponent {
   team: Team = new Team()
+  members?: Member[];
 
   constructor(private teamService: TeamService,
     private tokenService: TokenService){
       this.loadTeam()
+      this.loadMembers()
     }
 
   loadTeam(){
     this.teamService
       .getTeam(this.tokenService.getUsernameFromToken())
       .subscribe((result: Team) => this.team = result)
-    console.log("I was initialized");
+    console.log("Team was initialized");
+  }
+
+  loadMembers(){
+    this.teamService.getMembers(this.tokenService.getTeamIdFromToken())
+    .subscribe((result: Member[]) => this.members = result)
+    console.log(this.tokenService.getTeamIdFromToken());
+    
+    console.log("Members were initialized");
+  }
+
+  getDisplayNumber(index: number): number {
+    return index + 1;
   }
 
 }
