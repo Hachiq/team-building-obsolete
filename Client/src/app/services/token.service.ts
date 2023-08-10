@@ -46,4 +46,13 @@ export class TokenService {
       return false; // Return false on error (invalid token, decoding error, etc.)
     }
   }
+
+  userIsTeamMember(): boolean {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      const decodedToken: any = jwtDecode(token);
+      return decodedToken.hasOwnProperty('TeamId');
+    }
+    return false;
+  }
 }
