@@ -8,6 +8,7 @@ namespace Api.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<User> Users => Set<User>();
+        public DbSet<Stat> Stats => Set<Stat>();
         public DbSet<Role> Roles => Set<Role>();
         public DbSet<Team> Teams => Set<Team>();
     }
