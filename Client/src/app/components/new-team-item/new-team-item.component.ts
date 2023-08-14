@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/services/notification.service';
 import { TokenService } from 'src/app/services/token.service';
 
@@ -10,12 +11,16 @@ import { TokenService } from 'src/app/services/token.service';
 export class NewTeamItemComponent {
 
   constructor(private tokenService: TokenService,
-    private notificationService: NotificationService){}
+    private notificationService: NotificationService,
+    private router: Router){}
 
- getRoute(): string{
+ redirect(){
   if(this.tokenService.userIsInRole('Chief')){
-    return 'new';
+    this.router.navigate(['new']);
+    return;
   }
-  return 'login';
+  this.notificationService.accessDenied();
+  this.router.navigate(['login']);
+  return;
  }
 }
