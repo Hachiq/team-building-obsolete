@@ -1,4 +1,5 @@
 using Api.Data;
+using Api.Services.StatService;
 using Api.Services.TeamService;
 using Api.Services.UserService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -18,6 +19,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(appC
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITeamService, TeamService>();
+builder.Services.AddScoped<IStatService, StatService>();
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
