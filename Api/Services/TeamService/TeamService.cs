@@ -47,5 +47,10 @@ namespace Api.Services.TeamService
         {
             return await _db.Teams.Include(t => t.Users).FirstOrDefaultAsync(t => t.Id == user.TeamId);
         }
+
+        public async Task<bool> TeamExists(int teamId)
+        {
+            return await _db.Teams.AnyAsync(t => t.Id == teamId);
+        }
     }
 }

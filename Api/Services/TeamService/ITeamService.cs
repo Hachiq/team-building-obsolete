@@ -11,5 +11,6 @@ namespace Api.Services.TeamService
         Task<List<User>> GetTeamMembersAsync(int teamId);
         Team GetTeamByTeamNameAsync(string teamName);
         Task<Team> GetTeamByUserAsync(User user);
+        Task<bool> TeamExists(int teamId);
     }
 }

@@ -70,7 +70,7 @@ namespace Api.Controllers
         [HttpGet("members/{teamId}")]
         public async Task<ActionResult<List<User>>> GetTeamMemtbers(int teamId)
         {
-            if (teamId is 0)
+            if (!await _teamService.TeamExists(teamId))
             {
                 return NotFound("No such team exists");
             }
