@@ -4,6 +4,7 @@ namespace Api.Services.StatService
 {
     public interface IStatService
     {
-        Task<IEnumerable<User>> GetUserStats();
+        Task<IEnumerable<User>> GetUserStatsAsync();
+        Task<Stat> GetStatByUserAsync(User user);
     }
 }

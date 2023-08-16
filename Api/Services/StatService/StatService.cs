@@ -11,7 +11,13 @@ namespace Api.Services.StatService
         {
             _db = db;
         }
-        public async Task<IEnumerable<User>> GetUserStats()
+
+        public async Task<Stat> GetStatByUserAsync(User user)
+        {
+            return user.Stat;
+        }
+
+        public async Task<IEnumerable<User>> GetUserStatsAsync()
         {
             return await _db.Users.Include(u => u.Stat).ToListAsync();
         }
