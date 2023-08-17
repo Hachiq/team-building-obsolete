@@ -25,12 +25,20 @@ namespace Api.Controllers
             return Ok(await _statService.GetUserStatsAsync());
         }
 
-        [HttpGet("single")]
-        public async Task<ActionResult<Stat>> GetStat()
+        [HttpGet("{username}")]
+        public async Task<ActionResult<Stat>> GetStatByUser(string username)
         {
-            var username = "Hachiq"; // Fix endpoints
             var user = _userService.GetUserByUsername(username);
-            return Ok(await _statService.GetStatByUserAsync(user));
+            if (user is null)
+            {
+                return NotFound("User not found");
+            }
+            var stat = await _statService.GetStatByUserAsync(user);
+            if (stat is null)
+            {
+                return NotFound("Stat not found");
+            }
+            return Ok(stat);
         }
     }
 }
