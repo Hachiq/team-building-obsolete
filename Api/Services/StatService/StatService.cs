@@ -14,7 +14,8 @@ namespace Api.Services.StatService
 
         public async Task<Stat> GetStatByUserAsync(User user)
         {
-            return await _db.Stats.FirstOrDefaultAsync(s => s.Id == user.Id);
+            return user.Stat;
+            //return await _db.Stats.FirstOrDefaultAsync(s => s.Id == user.Id);
         }
 
         public async Task<IEnumerable<User>> GetUserStatsAsync()

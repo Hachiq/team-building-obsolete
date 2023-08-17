@@ -19,7 +19,7 @@ namespace Api.Services.UserService
         }
         public User GetUserByUsername(string username)
         {
-            User user = _db.Users.FirstOrDefault(u => u.Username == username);
+            User user = _db.Users.Include(u => u.Stat).FirstOrDefault(u => u.Username == username);
             return user;
         }
         public string GetUserRole(User user)
