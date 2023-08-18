@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Member } from 'src/app/models/member';
 import { Team } from 'src/app/models/team';
 import { TeamService } from 'src/app/services/team.service';
@@ -14,7 +15,8 @@ export class TeamPanelComponent {
   members?: Member[];
 
   constructor(private teamService: TeamService,
-    private tokenService: TokenService){
+    private tokenService: TokenService,
+    private router: Router){
       this.loadTeam()
       this.loadMembers()
     }
@@ -32,6 +34,10 @@ export class TeamPanelComponent {
     console.log(this.tokenService.getTeamIdFromToken());
     
     console.log("Members were initialized");
+  }
+
+  goToUserStat(username: string) {
+    this.router.navigate(['/stat', username]);
   }
 
   getDisplayNumber(index: number): number {

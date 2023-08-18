@@ -31,6 +31,7 @@ export class TeamService {
     ).pipe(map(
       users => users.map(
         user => ({
+          username: user.username,
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email

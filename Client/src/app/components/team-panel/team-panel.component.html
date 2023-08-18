@@ -7,6 +7,7 @@
         <thead class="table-dark">
             <tr>
                 <th scope="col" style="min-width: 50px;">#</th>
+                <th scope="col"> Username</th>
                 <th scope="col">First name</th>
                 <th scope="col">Last name</th>
                 <th scope="col">Email</th>
@@ -16,10 +17,11 @@
         <tbody>
             <tr *ngFor="let member of members; let i = index">
               <th scope="row">{{ getDisplayNumber(i) }}</th>
+              <td>{{ member.username }}</td>
               <td>{{ member.firstName }}</td>
               <td>{{ member.lastName }}</td>
               <td>{{ member.email }}</td>
-              <td></td>
+              <td style="text-align: center;"><button (click)="goToUserStat(member.username)" class="btn btn-info">Info</button></td>
             </tr>
           </tbody>
     </table>

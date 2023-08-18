@@ -1,0 +1,22 @@
+<div style="width: 700px; margin-top: 30px; margin-left: 100px;">
+    
+    <table class="table table-striped table-bordered" style="margin-top: 20px;">
+        <caption>Stats for {{ user }}</caption>
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Worked</th>
+                <th scope="col">Paid</th>
+                <th scope="col">Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td>{{ stat.id }}</td>
+              <td>{{ stat.daysWorked }}</td>
+              <td>{{ stat.daysPaid }}</td>
+              <td>{{ stat.salary }}</td>
+            </tr>
+          </tbody>
+    </table>
+</div>
