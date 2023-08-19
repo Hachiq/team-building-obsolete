@@ -15,6 +15,6 @@ namespace Api.Models
         public int RoleId { get; set; }
         public int? TeamId { get; set; }
         public Team? Team { get; set; }
-        public Stat? Stat { get; set; }
+        public Stat Stat { get; set; } = new Stat();
     }
 }
