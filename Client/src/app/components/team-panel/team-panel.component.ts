@@ -40,6 +40,13 @@ export class TeamPanelComponent {
     this.router.navigate(['/stat', username]);
   }
 
+  canReview(member: Member){
+    if(member.username == this.tokenService.getUsernameFromToken() || this.tokenService.userIsInRole('Chief')){
+      return true;
+    }
+    return false;
+  }
+
   getDisplayNumber(index: number): number {
     return index + 1;
   }
