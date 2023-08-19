@@ -6,5 +6,6 @@ namespace Api.Services.StatService
     {
         Task<IEnumerable<User>> GetUserStatsAsync();
         Task<Stat> GetStatByUserAsync(User user);
+        Task SetSalaryAsync(User user, int newSalary);
     }
 }

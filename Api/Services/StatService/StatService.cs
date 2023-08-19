@@ -22,5 +22,12 @@ namespace Api.Services.StatService
         {
             return await _db.Users.Include(u => u.Stat).ToListAsync();
         }
+
+        public async Task SetSalaryAsync(User user, int newSalary)
+        {
+            user.Stat.Salary = newSalary;
+            _db.Update(user);
+            await _db.SaveChangesAsync();
+        }
     }
 }

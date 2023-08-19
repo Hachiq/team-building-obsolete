@@ -1,4 +1,5 @@
-﻿using Api.Models;
+﻿using Api.DTOs;
+using Api.Models;
 using Api.Services.StatService;
 using Api.Services.UserService;
 using Microsoft.AspNetCore.Http;
@@ -39,6 +40,18 @@ namespace Api.Controllers
                 return NotFound("Stat not found");
             }
             return Ok(stat);
+        }
+
+        [HttpPut("set")]
+        public async Task<ActionResult> SetSalary(NewSalaryDto salary)
+        {
+            User user = _userService.GetUserByUsername(salary.Username);
+            if (user is null)
+            {
+                return NotFound("User not found");
+            }
+            await _statService.SetSalaryAsync(user, salary.NewSalary);
+            return Ok();
         }
     }
 }
