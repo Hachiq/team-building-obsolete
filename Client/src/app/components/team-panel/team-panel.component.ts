@@ -13,6 +13,7 @@ import { TokenService } from 'src/app/services/token.service';
 export class TeamPanelComponent {
   team: Team = new Team()
   members?: Member[];
+  selectedMembers: Member[] = [];
 
   constructor(private teamService: TeamService,
     private tokenService: TokenService,
@@ -45,6 +46,22 @@ export class TeamPanelComponent {
       return true;
     }
     return false;
+  }
+
+  toggleSelection(member: Member) {
+    if (this.isSelected(member)) {
+      this.selectedMembers = this.selectedMembers.filter(selectedMember => selectedMember !== member);
+      console.log(this.selectedMembers);
+      
+    } else {
+      this.selectedMembers.push(member);
+      console.log(this.selectedMembers);
+      
+    }
+  }
+
+  isSelected(member: Member): boolean{
+    return this.selectedMembers.includes(member);
   }
 
   getDisplayNumber(index: number): number {
