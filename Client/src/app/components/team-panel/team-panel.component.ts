@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Member } from 'src/app/models/member';
 import { Team } from 'src/app/models/team';
+import { StatService } from 'src/app/services/stat.service';
 import { TeamService } from 'src/app/services/team.service';
 import { TokenService } from 'src/app/services/token.service';
 
@@ -14,10 +15,12 @@ export class TeamPanelComponent {
   team: Team = new Team()
   members?: Member[];
   selectedMembers: Member[] = [];
+  errorMessage: string = '';
 
   constructor(private teamService: TeamService,
     private tokenService: TokenService,
-    private router: Router){
+    private router: Router,
+    private statService: StatService){
       this.loadTeam()
       this.loadMembers()
     }
@@ -62,6 +65,31 @@ export class TeamPanelComponent {
 
   isSelected(member: Member): boolean{
     return this.selectedMembers.includes(member);
+  }
+
+  addDaysWorked() {
+    for (const member of this.selectedMembers) {
+      console.log(member.username);
+      
+      this.statService.addDayWorked(member.username)
+      .subscribe(() => {
+        console.log(`Success with ${member.username}`);
+        this.loadMembers();
+      },
+      (error) => {
+        if (error.status === 404){
+          this.errorMessage = error.message;
+        }
+        else {
+          this.errorMessage = "Undefined error. Please, try again later.";
+        }
+      }
+      )
+    }
+  }
+
+  test(){
+    this.statService.addDayWorked('Vania').subscribe(() => console.log("Good"));
   }
 
   getDisplayNumber(index: number): number {

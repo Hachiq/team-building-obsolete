@@ -1,6 +1,8 @@
 <h2>Your team is {{ team.name }} with id {{ team.id }}</h2>
 
 <div style="width: 700px; margin-top: 30px; margin-left: 100px;">
+
+    <div class="text-danger" *ngIf="errorMessage"><h5>{{ errorMessage }}</h5></div>
     
     <table class="table table-striped table-bordered" style="margin-top: 20px;">
         <caption>Your teammates</caption>
@@ -25,4 +27,7 @@
             </tr>
           </tbody>
     </table>
+
+    <button class="btn btn-primary" (click)="addDaysWorked()">Add one day worked for selected members</button>
+    <button class="btn btn-primary" (click)="test()">Test</button>
 </div>

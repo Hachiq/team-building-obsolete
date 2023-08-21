@@ -53,5 +53,17 @@ namespace Api.Controllers
             await _statService.SetSalaryAsync(user, salary.NewSalary);
             return Ok();
         }
+
+        [HttpPut("add")]
+        public async Task<ActionResult> AddDayWorked(string username)
+        {
+            User user = _userService.GetUserByUsername(username);
+            if (user is null)
+            {
+                return NotFound("User not found");
+            }
+            await _statService.AddDayWorkedAsync(user);
+            return Ok();
+        }
     }
 }

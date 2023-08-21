@@ -23,4 +23,10 @@ export class StatService {
       salary
     )
   }
+
+  public addDayWorked(username: string): Observable<any> {
+    return this.http.put<any>(
+      'https://localhost:7152/api/Stat/add', username
+    )
+  }
 }
