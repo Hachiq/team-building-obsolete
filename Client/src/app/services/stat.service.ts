@@ -25,9 +25,9 @@ export class StatService {
     )
   }
 
-  public addDayWorked(user: Member): Observable<any> {
+  public addDayWorked(member: Member): Observable<any> {
     return this.http.put<any>(
-      'https://localhost:7152/api/Stat/add', user
+      'https://localhost:7152/api/Stat/add', member
     )
   }
 }
