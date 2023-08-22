@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Stat } from '../models/stat';
 import { NewSalaryDto } from '../models/newSalaryDto';
+import { Member } from '../models/member';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +25,9 @@ export class StatService {
     )
   }
 
-  public addDayWorked(username: string): Observable<any> {
+  public addDayWorked(user: Member): Observable<any> {
     return this.http.put<any>(
-      'https://localhost:7152/api/Stat/add', username
+      'https://localhost:7152/api/Stat/add', user
     )
   }
 }

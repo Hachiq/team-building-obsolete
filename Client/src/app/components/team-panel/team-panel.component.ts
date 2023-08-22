@@ -68,10 +68,8 @@ export class TeamPanelComponent {
   }
 
   addDaysWorked() {
-    for (const member of this.selectedMembers) {
-      console.log(member.username);
-      
-      this.statService.addDayWorked(member.username)
+    for (const member of this.selectedMembers) {      
+      this.statService.addDayWorked(member)
       .subscribe(() => {
         console.log(`Success with ${member.username}`);
         this.loadMembers();
@@ -86,10 +84,6 @@ export class TeamPanelComponent {
       }
       )
     }
-  }
-
-  test(){
-    this.statService.addDayWorked('Vania').subscribe(() => console.log("Good"));
   }
 
   getDisplayNumber(index: number): number {

@@ -55,9 +55,9 @@ namespace Api.Controllers
         }
 
         [HttpPut("add")]
-        public async Task<ActionResult> AddDayWorked(string username)
+        public async Task<ActionResult> AddDayWorked(MemberDto member)
         {
-            User user = _userService.GetUserByUsername(username);
+            User user = _userService.GetUserByUsername(member.Username);
             if (user is null)
             {
                 return NotFound("User not found");
