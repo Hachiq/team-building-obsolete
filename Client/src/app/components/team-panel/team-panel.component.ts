@@ -86,6 +86,25 @@ export class TeamPanelComponent {
     }
   }
 
+  addDaysPaid() {
+    for (const member of this.selectedMembers) {      
+      this.statService.addDayPaid(member)
+      .subscribe(() => {
+        console.log(`Success with ${member.username}`);
+        this.loadMembers();
+      },
+      (error) => {
+        if (error.status === 404){
+          this.errorMessage = error.message;
+        }
+        else {
+          this.errorMessage = "Undefined error. Please, try again later.";
+        }
+      }
+      )
+    }
+  }
+
   getDisplayNumber(index: number): number {
     return index + 1;
   }

@@ -36,5 +36,12 @@ namespace Api.Services.StatService
             _db.Update(user);
             await _db.SaveChangesAsync();
         }
+
+        public async Task AddDayPaidAsync(User user)
+        {
+            user.Stat.DaysPaid += 1;
+            _db.Update(user);
+            await _db.SaveChangesAsync();
+        }
     }
 }

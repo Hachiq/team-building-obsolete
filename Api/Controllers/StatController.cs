@@ -54,7 +54,7 @@ namespace Api.Controllers
             return Ok();
         }
 
-        [HttpPut("add")]
+        [HttpPut("addworked")]
         public async Task<ActionResult> AddDayWorked(MemberDto member)
         {
             User user = _userService.GetUserByUsername(member.Username);
@@ -63,6 +63,18 @@ namespace Api.Controllers
                 return NotFound("User not found");
             }
             await _statService.AddDayWorkedAsync(user);
+            return Ok();
+        }
+
+        [HttpPut("addpaid")]
+        public async Task<ActionResult> AddDayPaid(MemberDto member)
+        {
+            User user = _userService.GetUserByUsername(member.Username);
+            if (user is null)
+            {
+                return NotFound("User not found");
+            }
+            await _statService.AddDayPaidAsync(user);
             return Ok();
         }
     }
