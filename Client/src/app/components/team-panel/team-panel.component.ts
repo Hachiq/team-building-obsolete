@@ -29,15 +29,12 @@ export class TeamPanelComponent {
     this.teamService
       .getTeam(this.tokenService.getUsernameFromToken())
       .subscribe((result: Team) => this.team = result)
-    console.log("Team was initialized");
   }
 
   loadMembers(){
-    this.teamService.getMembers(this.tokenService.getTeamIdFromToken())
-    .subscribe((result: Member[]) => this.members = result)
-    console.log(this.tokenService.getTeamIdFromToken());
-    
-    console.log("Members were initialized");
+    this.teamService
+      .getMembers(this.tokenService.getTeamIdFromToken())
+      .subscribe((result: Member[]) => this.members = result)
   }
 
   goToUserStat(username: string) {
@@ -52,15 +49,16 @@ export class TeamPanelComponent {
   }
 
   toggleSelection(member: Member) {
-    if (this.isSelected(member)) {
-      this.selectedMembers = this.selectedMembers.filter(selectedMember => selectedMember !== member);
-      console.log(this.selectedMembers);
-      
-    } else {
-      this.selectedMembers.push(member);
-      console.log(this.selectedMembers);
-      
+    if(this.userIsChief()){
+      if (this.isSelected(member)) {
+        this.selectedMembers = this.selectedMembers.filter(selectedMember => selectedMember !== member);
+        console.log(this.selectedMembers);
+      } else {
+        this.selectedMembers.push(member);
+        console.log(this.selectedMembers);
+      }
     }
+    return;
   }
 
   isSelected(member: Member): boolean{
@@ -103,6 +101,10 @@ export class TeamPanelComponent {
       }
       )
     }
+  }
+
+  userIsChief(): boolean{
+    return this.tokenService.userIsInRole('Chief');
   }
 
   getDisplayNumber(index: number): number {
