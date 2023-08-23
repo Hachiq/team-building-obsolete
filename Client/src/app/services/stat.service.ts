@@ -27,13 +27,13 @@ export class StatService {
 
   public addDayWorked(member: Member): Observable<any> {
     return this.http.put<any>(
-      'https://localhost:7152/api/Stat/addworked', member
+      'https://localhost:7152/api/Stat/increment-day-worked', member
     )
   }
 
   public addDayPaid(member: Member): Observable<any> {
     return this.http.put<any>(
-      'https://localhost:7152/api/Stat/addpaid', member
+      'https://localhost:7152/api/Stat/increment-day-paid', member
     )
   }
 }

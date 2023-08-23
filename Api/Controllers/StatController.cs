@@ -54,7 +54,7 @@ namespace Api.Controllers
             return Ok();
         }
 
-        [HttpPut("addworked")]
+        [HttpPut("increment-day-worked")]
         public async Task<ActionResult> AddDayWorked(MemberDto member)
         {
             User user = _userService.GetUserByUsername(member.Username);
@@ -66,7 +66,7 @@ namespace Api.Controllers
             return Ok();
         }
 
-        [HttpPut("addpaid")]
+        [HttpPut("increment-day-paid")]
         public async Task<ActionResult> AddDayPaid(MemberDto member)
         {
             User user = _userService.GetUserByUsername(member.Username);
