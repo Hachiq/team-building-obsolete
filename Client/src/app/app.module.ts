@@ -18,6 +18,7 @@ import { NewTeamItemComponent } from './components/new-team-item/new-team-item.c
 import { TeamFormComponent } from './components/team-form/team-form.component';
 import { TeamPanelComponent } from './components/team-panel/team-panel.component';
 import { StatPanelComponent } from './components/stat-panel/stat-panel.component';
+import { AddDaysSectionComponent } from './components/add-days-section/add-days-section.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { StatPanelComponent } from './components/stat-panel/stat-panel.component
     NewTeamItemComponent,
     TeamFormComponent,
     TeamPanelComponent,
-    StatPanelComponent
+    StatPanelComponent,
+    AddDaysSectionComponent
   ],
   imports: [
     BrowserModule,
