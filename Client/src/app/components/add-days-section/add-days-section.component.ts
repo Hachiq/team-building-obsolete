@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Member } from 'src/app/models/member';
+import { SharedService } from 'src/app/services/shared.service';
 import { StatService } from 'src/app/services/stat.service';
 
 @Component({
@@ -10,7 +11,14 @@ import { StatService } from 'src/app/services/stat.service';
 export class AddDaysSectionComponent {
   selectedMembers: Member[] = [];
 
-  constructor(private statService: StatService){}
+  constructor(private statService: StatService,
+    private sharedService: SharedService){ }
+
+  ngOnInit(){
+    this.sharedService.selectedMembers$.subscribe((members) => {
+      this.selectedMembers = members;
+    })
+  }
 
   addDaysWorked() {
     for (const member of this.selectedMembers) {      

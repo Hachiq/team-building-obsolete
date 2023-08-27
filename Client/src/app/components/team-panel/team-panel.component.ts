@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Member } from 'src/app/models/member';
 import { Team } from 'src/app/models/team';
+import { SharedService } from 'src/app/services/shared.service';
 import { StatService } from 'src/app/services/stat.service';
 import { TeamService } from 'src/app/services/team.service';
 import { TokenService } from 'src/app/services/token.service';
@@ -20,7 +22,7 @@ export class TeamPanelComponent {
   constructor(private teamService: TeamService,
     private tokenService: TokenService,
     private router: Router,
-    private statService: StatService){
+    private sharedService: SharedService){
       this.loadTeam()
       this.loadMembers()
     }
@@ -52,9 +54,11 @@ export class TeamPanelComponent {
     if(this.userIsChief()){
       if (this.isSelected(member)) {
         this.selectedMembers = this.selectedMembers.filter(selectedMember => selectedMember !== member);
+        this.sharedService.updateSelectedMembers(this.selectedMembers);
         console.log(this.selectedMembers);
       } else {
         this.selectedMembers.push(member);
+        this.sharedService.updateSelectedMembers(this.selectedMembers);
         console.log(this.selectedMembers);
       }
     }
@@ -63,44 +67,6 @@ export class TeamPanelComponent {
 
   isSelected(member: Member): boolean{
     return this.selectedMembers.includes(member);
-  }
-
-  addDaysWorked() {
-    for (const member of this.selectedMembers) {      
-      this.statService.addDayWorked(member)
-      .subscribe(() => {
-        console.log(`Success with ${member.username}`);
-        this.loadMembers();
-      },
-      (error) => {
-        if (error.status === 404){
-          this.errorMessage = error.message;
-        }
-        else {
-          this.errorMessage = "Undefined error. Please, try again later.";
-        }
-      }
-      )
-    }
-  }
-
-  addDaysPaid() {
-    for (const member of this.selectedMembers) {      
-      this.statService.addDayPaid(member)
-      .subscribe(() => {
-        console.log(`Success with ${member.username}`);
-        this.loadMembers();
-      },
-      (error) => {
-        if (error.status === 404){
-          this.errorMessage = error.message;
-        }
-        else {
-          this.errorMessage = "Undefined error. Please, try again later.";
-        }
-      }
-      )
-    }
   }
 
   userIsChief(): boolean{
