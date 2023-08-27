@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NewSalaryDto } from 'src/app/models/newSalaryDto';
 import { Stat } from 'src/app/models/stat';
 import { StatService } from 'src/app/services/stat.service';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-stat-panel',
@@ -16,7 +17,8 @@ export class StatPanelComponent {
   errorMessage: string = '';
 
   constructor(private route: ActivatedRoute,
-    private statService: StatService) {
+    private statService: StatService,
+    private tokenService: TokenService) {
     this.loadStats();
   }
 
@@ -42,5 +44,9 @@ export class StatPanelComponent {
         this.errorMessage = "Undefined error. Please, try again later.";
       }
     })
+  }
+
+  userIsChief(): boolean{
+    return this.tokenService.userIsInRole('Chief');
   }
 }

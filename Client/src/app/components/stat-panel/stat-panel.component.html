@@ -22,7 +22,7 @@
           </tbody>
     </table>
 
-    <div class="input-group mb-3">
+    <div class="input-group mb-3" *ngIf="userIsChief()">
         <span class="input-group-text">Set Salary:</span>
         <input type="number" class="form-control" name="newSalary" [(ngModel)]="newSalaryDto.newSalary" placeholder="Enter salary">
         <button class="btn btn-primary" (click)="setSalary()">Set</button>
