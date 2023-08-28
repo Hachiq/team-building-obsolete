@@ -33,7 +33,7 @@ namespace Api.Controllers
             var user = _userService.GetUserByUsername(request.User);
             if (user == null || user.TeamId is not null) 
             {
-                return BadRequest("Something went wrong. Make sure you are not a member of a team already");
+                return BadRequest("Something went wrong. Make sure you are not a member of a team already.");
             }
             await _teamService.AddTeamAsync(new Team
             {
@@ -49,10 +49,14 @@ namespace Api.Controllers
             var team = _teamService.GetTeamByTeamNameAsync(request.Team);
             if (team == null)
             {
-                return BadRequest("Something went wrong. It seems, this team does not exist");
+                return BadRequest("Something went wrong. It seems, this team does not exist.");
             }
             var user = _userService.GetUserByUsername(request.User);
-            if (user == null || user.TeamId is not null)
+            if (user == null)
+            {
+                return BadRequest("Something went wrong. Make sure you are logged in.");
+            }
+            if (user.TeamId is not null)
             {
                 return BadRequest("Something went wrong. Make sure you are not a member of a team already.");
             }
