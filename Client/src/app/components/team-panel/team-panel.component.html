@@ -1,4 +1,4 @@
-<h2>Your team is {{ team.name }} with id {{ team.id }}</h2>
+<h1 style="padding-top: 20px; text-align: center;">Team {{ team.name }}</h1>
 
 <div style="width: 700px; margin-top: 30px; margin-left: 100px;">
 
@@ -8,7 +8,7 @@
         <caption>Your teammates</caption>
         <thead class="table-dark">
             <tr>
-                <th scope="col" style="min-width: 50px;">#</th>
+                <th scope="col" style="min-width: 50px; text-align: center;">#</th>
                 <th scope="col"> Username</th>
                 <th scope="col">First name</th>
                 <th scope="col">Last name</th>
@@ -18,7 +18,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let member of members; let i = index" [ngClass]="{ 'table-primary': isSelected(member) }" (click)="toggleSelection(member)">
-              <th scope="row">{{ getDisplayNumber(i) }}</th>
+              <th scope="row" style="text-align: center;">{{ getDisplayNumber(i) }}</th>
               <td>{{ member.username }}</td>
               <td>{{ member.firstName }}</td>
               <td>{{ member.lastName }}</td>
