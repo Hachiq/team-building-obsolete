@@ -25,9 +25,13 @@ namespace Api.Controllers
         [HttpPost("register")]
         public async Task<ActionResult> Register(UserDto request)
         {
-            if (!_userService.IsUsernameUnique(request) || !_userService.IsEmailUnique(request))
+            if (!_userService.IsUsernameUnique(request))
             {
-                return BadRequest($"User {request.Username} already exists"); // Should be updated (username OR email exists).
+                return BadRequest($"User {request.Username} already exists");
+            }
+            if (!_userService.IsEmailUnique(request))
+            {
+                return BadRequest($"User with this email already exists");
             }
 
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
