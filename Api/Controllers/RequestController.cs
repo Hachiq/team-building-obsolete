@@ -28,7 +28,7 @@ namespace Api.Controllers
         {
             return Ok(await _requestService.GetAllRequestsAsync());
         }
-        [HttpGet("get")]
+        [HttpGet("get/{teamId}")]
         public async Task<ActionResult<List<Request>>> GetRequests(int teamId)
         {
             return Ok(await _requestService.GetRequestsByTeamIdAsync(teamId));
