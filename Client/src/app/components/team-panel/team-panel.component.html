@@ -4,7 +4,7 @@
 
     <div class="text-danger" *ngIf="errorMessage"><h5>{{ errorMessage }}</h5></div>
     
-    <button type="button" class="btn btn-primary" style="background-color: #481449; border: none;">
+    <button (click)="goToPendingUsers()" type="button" class="btn btn-primary" style="background-color: #481449; border: none;">
         <i class="bi bi-person-fill-add"> Pending users</i>
     </button>
 

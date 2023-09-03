@@ -29,7 +29,7 @@ namespace Api.Controllers
             return Ok(await _requestService.GetAllRequestsAsync());
         }
         [HttpGet("get")]
-        public async Task<ActionResult<List<Request>>> GetRequest(int teamId)
+        public async Task<ActionResult<List<Request>>> GetRequests(int teamId)
         {
             return Ok(await _requestService.GetRequestsByTeamIdAsync(teamId));
         }

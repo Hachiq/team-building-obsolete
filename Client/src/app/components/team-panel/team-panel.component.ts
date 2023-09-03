@@ -43,6 +43,10 @@ export class TeamPanelComponent {
     this.router.navigate(['/stat', username]);
   }
 
+  goToPendingUsers() {
+    this.router.navigate(['pending']);
+  }
+
   canReview(member: Member){
     if(member.username == this.tokenService.getUsernameFromToken() || this.tokenService.userIsInRole('Chief')){
       return true;
