@@ -4,12 +4,20 @@
 
     <div class="text-danger" *ngIf="errorMessage"><h5>{{ errorMessage }}</h5></div>
     
+    <button type="button" class="btn btn-primary" style="background-color: #481449; border: none;">
+        <i class="bi bi-person-fill-add"> Pending users</i>
+    </button>
+
+    <button (click)="clearSelection()" type="button" class="btn btn-primary" style="background-color: #481449; border: none; margin-left: 20px;">
+        Clear selection
+    </button>
+
     <table class="table table-striped table-bordered" style="margin-top: 20px;">
         <caption>Your teammates</caption>
         <thead class="table-dark">
             <tr>
                 <th scope="col" style="min-width: 50px; text-align: center;">#</th>
-                <th scope="col"> Username</th>
+                <th scope="col">Username</th>
                 <th scope="col">First name</th>
                 <th scope="col">Last name</th>
                 <th scope="col">Email</th>
@@ -18,14 +26,14 @@
         </thead>
         <tbody>
             <tr *ngFor="let member of members; let i = index" [ngClass]="{ 'table-primary': isSelected(member) }" (click)="toggleSelection(member)">
-              <th scope="row" style="text-align: center;">{{ getDisplayNumber(i) }}</th>
-              <td>{{ member.username }}</td>
-              <td>{{ member.firstName }}</td>
-              <td>{{ member.lastName }}</td>
-              <td>{{ member.email }}</td>
-              <td style="text-align: center;"><button *ngIf="canReview(member)" (click)="goToUserStat(member.username)" class="btn btn-info">Info</button></td>
+            <th scope="row" style="text-align: center;">{{ getDisplayNumber(i) }}</th>
+            <td>{{ member.username }}</td>
+            <td>{{ member.firstName }}</td>
+            <td>{{ member.lastName }}</td>
+            <td>{{ member.email }}</td>
+            <td style="text-align: center;"><button *ngIf="canReview(member)" (click)="goToUserStat(member.username)" class="btn btn-info">Info</button></td>
             </tr>
-          </tbody>
+        </tbody>
     </table>
 
     <app-add-days-section *ngIf="userIsChief()"></app-add-days-section>

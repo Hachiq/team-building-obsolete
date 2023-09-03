@@ -65,6 +65,12 @@ export class TeamPanelComponent {
     return;
   }
 
+  clearSelection() {
+    this.selectedMembers = [];
+    console.log(this.selectedMembers);
+    
+  }
+
   isSelected(member: Member): boolean{
     return this.selectedMembers.includes(member);
   }
