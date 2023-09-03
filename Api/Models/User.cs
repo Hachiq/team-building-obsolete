@@ -21,5 +21,6 @@ namespace Api.Models
         public int? TeamId { get; set; }
         public Team? Team { get; set; }
         public Stat Stat { get; set; } = new Stat();
+        public List<Request>? Requests { get; set; }
     }
 }
