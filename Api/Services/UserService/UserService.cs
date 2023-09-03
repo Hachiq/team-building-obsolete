@@ -17,9 +17,9 @@ namespace Api.Services.UserService
         {
             return await _db.Users.ToListAsync();
         }
-        public User GetUserByUsername(string username)
+        public async Task<User> GetUserByUsername(string username)
         {
-            User user = _db.Users.Include(u => u.Stat).FirstOrDefault(u => u.Username == username);
+            User user = await _db.Users.Include(u => u.Stat).FirstOrDefaultAsync(u => u.Username == username);
             return user;
         }
         public string GetUserRole(User user)

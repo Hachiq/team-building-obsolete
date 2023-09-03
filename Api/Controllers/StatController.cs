@@ -29,7 +29,7 @@ namespace Api.Controllers
         [HttpGet("{username}")]
         public async Task<ActionResult<Stat>> GetStatByUser(string username)
         {
-            var user = _userService.GetUserByUsername(username);
+            var user = await _userService.GetUserByUsername(username);
             if (user is null)
             {
                 return NotFound("User not found");
@@ -45,7 +45,7 @@ namespace Api.Controllers
         [HttpPut("set")]
         public async Task<ActionResult> SetSalary(NewSalaryDto salary)
         {
-            User user = _userService.GetUserByUsername(salary.Username);
+            User user = await _userService.GetUserByUsername(salary.Username);
             if (user is null)
             {
                 return NotFound("User not found");
@@ -57,7 +57,7 @@ namespace Api.Controllers
         [HttpPut("increment-day-worked")]
         public async Task<ActionResult> AddDayWorked(MemberDto member)
         {
-            User user = _userService.GetUserByUsername(member.Username);
+            User user = await _userService.GetUserByUsername(member.Username);
             if (user is null)
             {
                 return NotFound("User not found");
@@ -69,7 +69,7 @@ namespace Api.Controllers
         [HttpPut("increment-day-paid")]
         public async Task<ActionResult> AddDayPaid(MemberDto member)
         {
-            User user = _userService.GetUserByUsername(member.Username);
+            User user = await _userService.GetUserByUsername(member.Username);
             if (user is null)
             {
                 return NotFound("User not found");

@@ -30,7 +30,7 @@ namespace Api.Controllers
         [HttpPost("add")]
         public async Task<ActionResult> Add(TeamDto request)
         {
-            var user = _userService.GetUserByUsername(request.User);
+            var user = await _userService.GetUserByUsername(request.User);
             if (user == null || user.TeamId is not null) 
             {
                 return BadRequest("Something went wrong. Make sure you are not a member of a team already.");
@@ -51,7 +51,7 @@ namespace Api.Controllers
             {
                 return BadRequest("Something went wrong. It seems, this team does not exist.");
             }
-            var user = _userService.GetUserByUsername(request.User);
+            var user = await _userService.GetUserByUsername(request.User);
             if (user == null)
             {
                 return BadRequest("Something went wrong. Make sure you are logged in.");
@@ -67,7 +67,7 @@ namespace Api.Controllers
         [HttpGet("single/{username}")]
         public async Task<ActionResult<Team>> GetTeamByUser(string username)
         {
-            var user = _userService.GetUserByUsername(username);
+            var user = await _userService.GetUserByUsername(username);
             return Ok(await _teamService.GetTeamByUserAsync(user));
         }
 
