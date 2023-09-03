@@ -33,13 +33,13 @@ namespace Api.Services.TeamService
 
         public async Task<List<User>> GetTeamMembersAsync(int teamId)
         {
-            Team team = _db.Teams.Include(t => t.Users).FirstOrDefault(u => u.Id == teamId);
+            Team team = await _db.Teams.Include(t => t.Users).FirstOrDefaultAsync(u => u.Id == teamId);
             return team.Users.ToList();
         }
 
-        public Team GetTeamByTeamNameAsync(string teamName)
+        public async Task<Team> GetTeamByTeamNameAsync(string teamName)
         {
-            Team team = _db.Teams.FirstOrDefault(u => u.Name == teamName);
+            Team team = await _db.Teams.FirstOrDefaultAsync(u => u.Name == teamName);
             return team;
         }
 

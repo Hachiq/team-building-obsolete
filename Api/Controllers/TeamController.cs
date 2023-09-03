@@ -46,7 +46,7 @@ namespace Api.Controllers
         [HttpPut("join")]
         public async Task<ActionResult> Join(TeamDto request)
         {
-            var team = _teamService.GetTeamByTeamNameAsync(request.Team);
+            var team = await _teamService.GetTeamByTeamNameAsync(request.Team);
             if (team == null)
             {
                 return BadRequest("Something went wrong. It seems, this team does not exist.");
