@@ -1,4 +1,5 @@
 using Api.Data;
+using Api.Services.RequestService;
 using Api.Services.StatService;
 using Api.Services.TeamService;
 using Api.Services.UserService;
@@ -20,6 +21,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(appC
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITeamService, TeamService>();
 builder.Services.AddScoped<IStatService, StatService>();
+builder.Services.AddScoped<IRequestService, RequestService>();
 
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
