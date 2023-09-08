@@ -47,6 +47,10 @@ namespace Api.Controllers
             {
                 return BadRequest("Something went wrong. User doesn`t exist.");
             }
+            if (user.TeamId is not null)
+            {
+                return BadRequest("Something went wrong. Make sure you are not a member of a team already.");
+            }
             await _requestService.CreateRequestAsync(user.Id, team.Id);
             return Ok();
         }
