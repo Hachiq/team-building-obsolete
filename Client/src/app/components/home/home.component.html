@@ -20,7 +20,7 @@
             <tr *ngFor="let team of teams; let i = index">
               <th scope="row">{{ getDisplayNumber(i) }}</th>
               <td>{{ team.name }}</td>
-              <td class="text-center"><button (click)="join(team)" class="btn btn-info">Join</button></td>
+              <td class="text-center"><button (click)="requestToJoin(team)" class="btn btn-info">Join</button></td>
             </tr>
           </tbody>
     </table>

@@ -21,9 +21,11 @@
                 <td>{{ request.userId }}</td>
                 <td>{{ request.teamId }}</td>
                 <td>{{ request.status }}</td>
-                <td>{{ request.dateOfRequest }}</td>
+                <td>{{ request.dateOfRequest | date:'dd.MM.yyyy HH:mm:ss UTC' }}</td>
             </tr>
         </tbody>
     </table>
+
+    <button (click)="button()" class="btn btn-info"></button>
 
 </div>

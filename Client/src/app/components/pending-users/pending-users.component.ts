@@ -25,4 +25,10 @@ export class PendingUsersComponent {
   getDisplayNumber(index: number): number {
     return index + 1;
   }
+
+  button(){
+    console.log(this.requests);
+    console.log(this.requests.at(1));
+    
+  }
 }

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Request } from '../models/request';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs';
+import { TeamRequest } from '../models/teamRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -14,16 +15,13 @@ export class RequestService {
   public getRequests(teamId: number) : Observable<Request[]>{
     return this.http.get<Request[]>(
       `https://localhost:7152/api/Request/get/${teamId}`
-    ).pipe(map(
-      requests => requests.map(
-        request => ({
-          id: request.id,
-          userId: request.userId,
-          teamId: request.teamId,
-          status: request.status,
-          dateOfRequest: request.dateOfRequest
-        })
-      )
-    ))
+    )
+  }
+
+  public joinRequest(request: TeamRequest): Observable<any> {
+    return this.http.post<any>(
+      'https://localhost:7152/api/Request/create', 
+      request
+    )
   }
 }

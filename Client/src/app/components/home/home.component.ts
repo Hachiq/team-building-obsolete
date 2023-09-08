@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Team } from 'src/app/models/team';
 import { TeamRequest } from 'src/app/models/teamRequest';
+import { RequestService } from 'src/app/services/request.service';
 import { TeamService } from 'src/app/services/team.service';
 import { TokenService } from 'src/app/services/token.service';
 
@@ -17,7 +18,8 @@ export class HomeComponent {
 
   constructor(private teamService: TeamService,
     private tokenService: TokenService,
-    private router: Router){
+    private router: Router,
+    private requestService: RequestService){
     this.loadTeams();
   }
 
@@ -31,10 +33,10 @@ export class HomeComponent {
     return index + 1;
   }
 
-  join(team: Team){
+  requestToJoin(team: Team){
     this.request.team = team.name;
     this.request.user = this.tokenService.getUsernameFromToken();
-    this.teamService.join(this.request).subscribe(() => {
+    this.requestService.joinRequest(this.request).subscribe(() => {
         console.log("Success");
         this.router.navigate(['panel']);
       },
