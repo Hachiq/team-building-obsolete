@@ -3,7 +3,7 @@
 <div style="width: 1000px; margin-top: 30px; margin-left: 100px;">
 
     <table class="table table-striped table-bordered" style="margin-top: 20px;">
-        <caption>Your teammates</caption>
+        <caption>Requests</caption>
         <thead class="table-dark">
             <tr>
                 <th scope="col" style="width: 50px; text-align: center;">#</th>
@@ -21,11 +21,9 @@
                 <td>{{ request.userId }}</td>
                 <td>{{ request.teamId }}</td>
                 <td>{{ request.status }}</td>
-                <td>{{ request.dateOfRequest | date:'dd.MM.yyyy HH:mm:ss UTC' }}</td>
+                <td>{{ request.requestDate | date: 'long' }}</td>
             </tr>
         </tbody>
     </table>
-
-    <button (click)="button()" class="btn btn-info"></button>
 
 </div>

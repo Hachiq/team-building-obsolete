@@ -9,7 +9,7 @@ import { TokenService } from 'src/app/services/token.service';
   styleUrls: ['./pending-users.component.scss']
 })
 export class PendingUsersComponent {
-  requests: Request[] = [];
+  requests?: Request[];
 
   constructor(private requestService: RequestService, 
     private tokenService: TokenService){
@@ -24,11 +24,5 @@ export class PendingUsersComponent {
 
   getDisplayNumber(index: number): number {
     return index + 1;
-  }
-
-  button(){
-    console.log(this.requests);
-    console.log(this.requests.at(1));
-    
   }
 }

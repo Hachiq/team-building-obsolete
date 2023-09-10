@@ -3,5 +3,5 @@ export class Request {
     userId: number = 0;
     teamId: number = 0;
     status: string = '';
-    dateOfRequest?: Date;
+    requestDate?: Date;
 }
