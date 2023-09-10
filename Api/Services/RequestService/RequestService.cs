@@ -17,7 +17,10 @@ namespace Api.Services.RequestService
         }
         public async Task<IEnumerable<Request>> GetRequestsByTeamIdAsync(int teamId)
         {
-            return await _db.Requests.Where(request => request.TeamId == teamId).ToListAsync();
+            return await _db.Requests
+                .Where(request => request.TeamId == teamId)
+                .Include(request => request.User)
+                .ToListAsync();
         }
         public async Task CreateRequestAsync(int userId, int teamId)
         {

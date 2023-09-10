@@ -7,21 +7,21 @@
         <thead class="table-dark">
             <tr>
                 <th scope="col" style="width: 50px; text-align: center;">#</th>
-                <th scope="col">Id</th>
-                <th scope="col">User id</th>
-                <th scope="col">Team id</th>
-                <th scope="col">Status</th>
+                <th scope="col">First name</th>
+                <th scope="col">Last name</th>
+                <th scope="col">Email</th>
                 <th scope="col">Date of request</th>
+                <th scope="col">Status</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let request of requests; let i = index">
                 <th scope="row" style="text-align: center;">{{ getDisplayNumber(i) }}</th>
-                <td>{{ request.id }}</td>
-                <td>{{ request.userId }}</td>
-                <td>{{ request.teamId }}</td>
-                <td>{{ request.status }}</td>
+                <td>{{ request.user?.firstName }}</td>
+                <td>{{ request.user?.lastName }}</td>
+                <td>{{ request.user?.email }}</td>
                 <td>{{ request.requestDate | date: 'long' }}</td>
+                <td class="text-danger">{{ request.status }}</td>
             </tr>
         </tbody>
     </table>
