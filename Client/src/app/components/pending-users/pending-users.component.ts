@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Request } from 'src/app/models/request';
 import { RequestService } from 'src/app/services/request.service';
@@ -12,7 +13,8 @@ export class PendingUsersComponent {
   requests?: Request[];
 
   constructor(private requestService: RequestService, 
-    private tokenService: TokenService){
+    private tokenService: TokenService,
+    private location: Location){
       this.loadRequests();
     }
 
@@ -24,5 +26,9 @@ export class PendingUsersComponent {
 
   getDisplayNumber(index: number): number {
     return index + 1;
+  }
+
+  back(){
+    this.location.back();
   }
 }
