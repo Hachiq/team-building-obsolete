@@ -1,5 +1,6 @@
 ﻿using Api.DTOs;
 using Api.Models;
+using Api.Services.RequestService;
 using Api.Services.TeamService;
 using Api.Services.UserService;
 using Microsoft.AspNetCore.Http;
@@ -14,11 +15,13 @@ namespace Api.Controllers
     {
         private readonly ITeamService _teamService;
         private readonly IUserService _userService;
+        private readonly IRequestService _requestService;
 
-        public TeamController(ITeamService teamService, IUserService userService)
+        public TeamController(ITeamService teamService, IUserService userService, IRequestService requestService)
         {
             _teamService = teamService;
             _userService = userService;
+            _requestService = requestService;
         }
 
         [HttpGet("get")]
@@ -47,7 +50,7 @@ namespace Api.Controllers
         public async Task<ActionResult> Join(TeamDto request)
         {
             var team = await _teamService.GetTeamByTeamNameAsync(request.Team);
-            if (team == null)
+            if (request.Team == null)
             {
                 return BadRequest("Something went wrong. It seems, this team does not exist.");
             }
@@ -58,7 +61,7 @@ namespace Api.Controllers
             }
             if (user.TeamId is not null)
             {
-                return BadRequest("Something went wrong. Make sure you are not a member of a team already.");
+                return BadRequest("Something went wrong. It seems this user is already a member of a team.");
             }
             await _teamService.AddTeamMemberAsync(team, user);
             return Ok();

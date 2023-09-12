@@ -1,7 +1,9 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Request } from 'src/app/models/request';
+import { TeamRequest } from 'src/app/models/teamRequest';
 import { RequestService } from 'src/app/services/request.service';
+import { TeamService } from 'src/app/services/team.service';
 import { TokenService } from 'src/app/services/token.service';
 
 @Component({
@@ -14,7 +16,8 @@ export class PendingUsersComponent {
 
   constructor(private requestService: RequestService, 
     private tokenService: TokenService,
-    private location: Location){
+    private location: Location,
+    private teamService: TeamService){
       this.loadRequests();
     }
 
@@ -23,6 +26,16 @@ export class PendingUsersComponent {
       .getRequests(this.tokenService.getTeamIdFromToken())
       .subscribe((result: Request[]) => this.requests = result)
   }
+
+  accept(user?: string, team?: string){
+    this.teamService
+      .join(new TeamRequest(team, user))
+      .subscribe(() => {
+        console.log("Success");
+      });
+  }
+  
+  decline(id: number){}
 
   getDisplayNumber(index: number): number {
     return index + 1;

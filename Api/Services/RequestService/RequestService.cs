@@ -15,11 +15,18 @@ namespace Api.Services.RequestService
         {
             return await _db.Requests.ToListAsync();
         }
+
+        public async Task<Request> GetRequestByIdAsync(int id)
+        {
+            return await _db.Requests.FirstOrDefaultAsync(request => request.Id == id);
+        }
+
         public async Task<IEnumerable<Request>> GetRequestsByTeamIdAsync(int teamId)
         {
             return await _db.Requests
                 .Where(request => request.TeamId == teamId)
                 .Include(request => request.User)
+                .Include(request => request.Team)
                 .ToListAsync();
         }
         public async Task CreateRequestAsync(int userId, int teamId)

@@ -1,3 +1,4 @@
+import { Team } from "./team";
 import { User } from "./user";
 
 export class Request {
@@ -7,4 +8,5 @@ export class Request {
     status: string = '';
     requestDate?: Date;
     user?: User;
+    team?: Team;
 }
