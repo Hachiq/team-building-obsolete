@@ -38,5 +38,23 @@ namespace Api.Services.RequestService
             });
             await _db.SaveChangesAsync();
         }
+
+        public bool AlreadyProcessed(Request request)
+        {
+            return request.Status == "Accepted" || request.Status == "Declined";
+        }
+
+        public async Task DeclineRequestAsync(Request request)
+        {
+            request.Status = "Declined";
+            _db.Update(request);
+            await _db.SaveChangesAsync();
+        }
+        public async Task AcceptRequestAsync(Request request)
+        {
+            request.Status = "Accepted";
+            _db.Update(request);
+            await _db.SaveChangesAsync();
+        }
     }
 }

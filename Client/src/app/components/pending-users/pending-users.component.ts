@@ -27,15 +27,27 @@ export class PendingUsersComponent {
       .subscribe((result: Request[]) => this.requests = result)
   }
 
-  accept(user?: string, team?: string){
+  accept(id: number, user?: string, team?: string){
     this.teamService
       .join(new TeamRequest(team, user))
       .subscribe(() => {
         console.log("Success");
       });
+    
+    this.requestService
+      .acceptRequest(id)
+      .subscribe(() => {
+        console.log("Request accepted");
+      })
   }
   
-  decline(id: number){}
+  decline(id: number){
+    this.requestService
+      .declineRequest(id)
+      .subscribe(() => {
+        console.log("Request declined");
+      });
+  }
 
   getDisplayNumber(index: number): number {
     return index + 1;

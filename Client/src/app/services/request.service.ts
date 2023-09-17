@@ -24,4 +24,18 @@ export class RequestService {
       request
     )
   }
+
+  public acceptRequest(id: number): Observable<any> {
+    return this.http.put<any>(
+      `https://localhost:7152/api/Request/accept/${id}`,
+      null
+    )
+  }
+
+  public declineRequest(id: number): Observable<any> {
+    return this.http.put<any>(
+      `https://localhost:7152/api/Request/decline/${id}`,
+      null
+    )
+  }
 }

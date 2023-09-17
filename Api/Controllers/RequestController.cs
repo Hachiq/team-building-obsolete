@@ -54,5 +54,43 @@ namespace Api.Controllers
             await _requestService.CreateRequestAsync(user.Id, team.Id);
             return Ok();
         }
+
+        [HttpPut("decline/{id}")]
+        public async Task<ActionResult> DeclineRequest(int id)
+        {
+            var request = await _requestService.GetRequestByIdAsync(id);
+
+            if (request is null)
+            {
+                return BadRequest("Request not found");
+            }
+            if (_requestService.AlreadyProcessed(request))
+            {
+                return BadRequest("Request was already processed");
+            }
+
+            await _requestService.DeclineRequestAsync(request);
+
+            return Ok();
+        }
+
+        [HttpPut("accept/{id}")]
+        public async Task<ActionResult> AcceptRequest(int id)
+        {
+            var request = await _requestService.GetRequestByIdAsync(id);
+
+            if (request is null)
+            {
+                return BadRequest("Request not found");
+            }
+            if (_requestService.AlreadyProcessed(request))
+            {
+                return BadRequest("Request was already processed");
+            }
+
+            await _requestService.AcceptRequestAsync(request);
+
+            return Ok();
+        }
     }
 }

@@ -27,7 +27,7 @@
                 <td class="text-danger">{{ request.status }}</td>
                 <td>
                     <div class="btn-group" role="group">
-                        <button (click)="accept(request.user?.username, request.team?.name)" class="btn btn-success" style="width: 100px; margin-left: 20px;">Accept</button>
+                        <button (click)="accept(request.id, request.user?.username, request.team?.name)" class="btn btn-success" style="width: 100px; margin-left: 20px;">Accept</button>
                         <button (click)="decline(request.id)" class="btn btn-danger" style="width: 100px; margin-right: 20px;">Decline</button>
                     </div>
                 </td>
