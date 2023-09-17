@@ -38,7 +38,7 @@ export class HomeComponent {
     this.request.user = this.tokenService.getUsernameFromToken();
     this.requestService.joinRequest(this.request).subscribe(() => {
         console.log("Success");
-        this.router.navigate(['panel']);
+        this.router.navigate(['home']);
       },
       (error) => {
         if (error.status === 400){
