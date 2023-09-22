@@ -31,6 +31,13 @@ namespace Api.Services.TeamService
             await _db.SaveChangesAsync();
         }
 
+        public async Task RemoveTeamMemberAsync(User user)
+        {
+            user.TeamId = null;
+            _db.Users.Update(user);
+            await _db.SaveChangesAsync();
+        }
+
         public async Task<List<User>> GetTeamMembersAsync(int teamId)
         {
             Team team = await _db.Teams.Include(t => t.Users).FirstOrDefaultAsync(u => u.Id == teamId);

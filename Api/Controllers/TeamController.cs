@@ -46,6 +46,18 @@ namespace Api.Controllers
             return Ok();
         }
 
+        [HttpDelete("remove-user-from-team/{username}")]
+        public async Task<ActionResult> RemoveTeamMember(string username)
+        {
+            var user = await _userService.GetUserByUsername(username);
+            if (user == null || user.TeamId is null)
+            {
+                return BadRequest("Something went wrong. Make sure this user was a member of your team");
+            }
+            await _teamService.RemoveTeamMemberAsync(user);
+            return Ok();
+        }
+
         [HttpPut("join")]
         public async Task<ActionResult> Join(TeamDto request)
         {
