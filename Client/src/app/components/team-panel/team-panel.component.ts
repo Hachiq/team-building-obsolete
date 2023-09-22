@@ -39,6 +39,13 @@ export class TeamPanelComponent {
       .subscribe((result: Member[]) => this.members = result)
   }
 
+  remove(username: string){
+    this.teamService.removeUser(username).subscribe(() => {
+      console.log(`${username} was fired`);
+      this.loadMembers();
+    })
+  }
+
   goToUserStat(username: string) {
     this.router.navigate(['/stat', username]);
   }

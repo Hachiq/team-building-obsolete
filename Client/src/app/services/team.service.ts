@@ -53,4 +53,10 @@ export class TeamService {
       request
     )
   }
+
+  public removeUser(username: string): Observable<any> {
+    return this.http.delete<any>(
+      `https://localhost:7152/api/Team/remove-user-from-team/${username}`
+    )
+  }
 }
