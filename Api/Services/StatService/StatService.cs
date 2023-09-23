@@ -43,5 +43,14 @@ namespace Api.Services.StatService
             _db.Update(user);
             await _db.SaveChangesAsync();
         }
+
+        public async Task ClearStatsAsync(User user)
+        {
+            user.Stat.DaysPaid = 0;
+            user.Stat.DaysWorked = 0;
+            user.Stat.Salary = 0;
+            _db.Update(user);
+            await _db.SaveChangesAsync();
+        }
     }
 }

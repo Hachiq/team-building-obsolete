@@ -1,6 +1,6 @@
 ﻿using Api.DTOs;
 using Api.Models;
-using Api.Services.RequestService;
+using Api.Services.StatService;
 using Api.Services.TeamService;
 using Api.Services.UserService;
 using Microsoft.AspNetCore.Http;
@@ -15,13 +15,13 @@ namespace Api.Controllers
     {
         private readonly ITeamService _teamService;
         private readonly IUserService _userService;
-        private readonly IRequestService _requestService;
+        private readonly IStatService _statService;
 
-        public TeamController(ITeamService teamService, IUserService userService, IRequestService requestService)
+        public TeamController(ITeamService teamService, IUserService userService, IStatService statService)
         {
             _teamService = teamService;
             _userService = userService;
-            _requestService = requestService;
+            _statService = statService;
         }
 
         [HttpGet("get")]
@@ -55,6 +55,7 @@ namespace Api.Controllers
                 return BadRequest("Something went wrong. Make sure this user was a member of your team");
             }
             await _teamService.RemoveTeamMemberAsync(user);
+            await _statService.ClearStatsAsync(user);
             return Ok();
         }
 
