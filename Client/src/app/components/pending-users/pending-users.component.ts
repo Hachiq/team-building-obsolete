@@ -38,6 +38,7 @@ export class PendingUsersComponent {
       .acceptRequest(id)
       .subscribe(() => {
         console.log("Request accepted");
+        this.loadRequests();
       })
   }
   
@@ -46,6 +47,7 @@ export class PendingUsersComponent {
       .declineRequest(id)
       .subscribe(() => {
         console.log("Request declined");
+        this.loadRequests();
       });
   }
 
