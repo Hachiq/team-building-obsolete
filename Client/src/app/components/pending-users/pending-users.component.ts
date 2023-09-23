@@ -28,18 +28,29 @@ export class PendingUsersComponent {
   }
 
   accept(id: number, user?: string, team?: string){
-    this.teamService
-      .join(new TeamRequest(team, user))
-      .subscribe(() => {
-        console.log("Success");
-      });
-    
     this.requestService
       .acceptRequest(id)
       .subscribe(() => {
-        console.log("Request accepted");
-        this.loadRequests();
-      })
+        console.log(`Request for ${user} accepted`);
+        this.teamService
+        .join(new TeamRequest(team, user))
+        .subscribe(() => {
+          console.log(`${user} joined the ${team}`);
+          this.loadRequests();
+        }
+        );
+      },
+      (error) => {
+        if (error.status === 400){
+          console.log(error.error);
+        }
+        else {
+          console.log('Undefined error. Please, try again later.');
+        }
+      }
+    );
+
+    
   }
   
   decline(id: number){
