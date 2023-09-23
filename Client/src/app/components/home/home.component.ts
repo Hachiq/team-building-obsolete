@@ -36,7 +36,7 @@ export class HomeComponent {
   requestToJoin(team: Team){
     this.request.team = team.name;
     this.request.user = this.tokenService.getUsernameFromToken();
-    this.requestService.joinRequest(this.request).subscribe(() => {
+    this.requestService.createRequest(this.request).subscribe(() => {
         console.log("Success");
         this.router.navigate(['home']);
       },

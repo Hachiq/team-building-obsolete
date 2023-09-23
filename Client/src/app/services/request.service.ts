@@ -18,7 +18,7 @@ export class RequestService {
     )
   }
 
-  public joinRequest(request: TeamRequest): Observable<any> {
+  public createRequest(request: TeamRequest): Observable<any> {
     return this.http.post<any>(
       'https://localhost:7152/api/Request/create', 
       request
