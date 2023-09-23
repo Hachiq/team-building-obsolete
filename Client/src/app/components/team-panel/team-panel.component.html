@@ -21,19 +21,22 @@
                 <th scope="col">First name</th>
                 <th scope="col">Last name</th>
                 <th scope="col">Email</th>
-                <th scope="col"></th>
-                <th scope="col"></th>
+                <th colspan="2" scope="col"></th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let member of members; let i = index" [ngClass]="{ 'table-primary': isSelected(member) }" (click)="toggleSelection(member)">
-            <th scope="row" style="text-align: center;">{{ getDisplayNumber(i) }}</th>
-            <td>{{ member.username }}</td>
-            <td>{{ member.firstName }}</td>
-            <td>{{ member.lastName }}</td>
-            <td>{{ member.email }}</td>
-            <td style="text-align: center;"><button *ngIf="canReview(member)" (click)="goToUserStat(member.username)" class="btn btn-info">Info</button></td>
-            <td style="text-align: center;"><button *ngIf="canReview(member)" (click)="remove(member.username)" class="btn btn-danger">Fire</button></td>
+                <th scope="row" style="text-align: center;">{{ getDisplayNumber(i) }}</th>
+                <td>{{ member.username }}</td>
+                <td>{{ member.firstName }}</td>
+                <td>{{ member.lastName }}</td>
+                <td>{{ member.email }}</td>
+                <td style="text-align: center;">
+                    <button *ngIf="canReview(member)" (click)="goToUserStat(member.username)" class="btn btn-info">Info</button>
+                </td>
+                <td style="text-align: center;">
+                    <button *ngIf="canReview(member)" (click)="remove(member.username)" class="btn btn-danger">Fire</button>
+                </td>
             </tr>
         </tbody>
     </table>
