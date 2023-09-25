@@ -35,7 +35,7 @@
                     <button *ngIf="canReview(member)" (click)="goToUserStat(member.username)" class="btn btn-info">Info</button>
                 </td>
                 <td style="text-align: center;">
-                    <button *ngIf="canReview(member)" (click)="remove(member.username)" class="btn btn-danger">Fire</button>
+                    <button *ngIf="canReview(member)" (click)="fire(member.username)" class="btn btn-danger">Fire</button>
                 </td>
             </tr>
         </tbody>

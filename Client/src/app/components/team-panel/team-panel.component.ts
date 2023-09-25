@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Member } from 'src/app/models/member';
 import { Team } from 'src/app/models/team';
+import { NotificationService } from 'src/app/services/notification.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { StatService } from 'src/app/services/stat.service';
 import { TeamService } from 'src/app/services/team.service';
@@ -22,7 +23,8 @@ export class TeamPanelComponent {
   constructor(private teamService: TeamService,
     private tokenService: TokenService,
     private router: Router,
-    private sharedService: SharedService){
+    private sharedService: SharedService,
+    private notificationService: NotificationService){
       this.loadTeam()
       this.loadMembers()
     }
@@ -39,9 +41,9 @@ export class TeamPanelComponent {
       .subscribe((result: Member[]) => this.members = result)
   }
 
-  remove(username: string){
+  fire(username: string){
     this.teamService.removeUser(username).subscribe(() => {
-      console.log(`${username} was fired`);
+      this.notificationService.memberFired(username);
       this.loadMembers();
     })
   }

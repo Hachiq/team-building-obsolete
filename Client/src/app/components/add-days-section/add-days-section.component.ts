@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Member } from 'src/app/models/member';
+import { NotificationService } from 'src/app/services/notification.service';
 import { SharedService } from 'src/app/services/shared.service';
 import { StatService } from 'src/app/services/stat.service';
 
@@ -12,7 +13,8 @@ export class AddDaysSectionComponent {
   selectedMembers: Member[] = [];
 
   constructor(private statService: StatService,
-    private sharedService: SharedService){ }
+    private sharedService: SharedService,
+    private notificationService: NotificationService){ }
 
   ngOnInit(){
     this.sharedService.selectedMembers$.subscribe((members) => {
@@ -24,7 +26,7 @@ export class AddDaysSectionComponent {
     for (const member of this.selectedMembers) {      
       this.statService.addDayWorked(member)
       .subscribe(() => {
-        console.log(`Success with ${member.username}`);
+        this.notificationService.dayWorkedAdded(member.username);
       },
       (error) => {
         if (error.status === 404){
@@ -44,7 +46,7 @@ export class AddDaysSectionComponent {
     for (const member of this.selectedMembers) {      
       this.statService.addDayPaid(member)
       .subscribe(() => {
-        console.log(`Success with ${member.username}`);
+        this.notificationService.dayPaidAdded(member.username);
       },
       (error) => {
         if (error.status === 404){

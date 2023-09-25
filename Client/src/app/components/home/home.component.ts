@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Team } from 'src/app/models/team';
 import { TeamRequest } from 'src/app/models/teamRequest';
+import { NotificationService } from 'src/app/services/notification.service';
 import { RequestService } from 'src/app/services/request.service';
 import { TeamService } from 'src/app/services/team.service';
 import { TokenService } from 'src/app/services/token.service';
@@ -19,7 +20,8 @@ export class HomeComponent {
   constructor(private teamService: TeamService,
     private tokenService: TokenService,
     private router: Router,
-    private requestService: RequestService){
+    private requestService: RequestService,
+    private notificationService: NotificationService){
     this.loadTeams();
   }
 
@@ -37,7 +39,7 @@ export class HomeComponent {
     this.request.team = team.name;
     this.request.user = this.tokenService.getUsernameFromToken();
     this.requestService.createRequest(this.request).subscribe(() => {
-        console.log("Success");
+        this.notificationService.requestSent(team.name);
         this.router.navigate(['home']);
       },
       (error) => {

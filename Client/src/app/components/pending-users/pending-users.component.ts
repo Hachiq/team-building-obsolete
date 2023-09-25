@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { Request } from 'src/app/models/request';
 import { TeamRequest } from 'src/app/models/teamRequest';
+import { NotificationService } from 'src/app/services/notification.service';
 import { RequestService } from 'src/app/services/request.service';
 import { TeamService } from 'src/app/services/team.service';
 import { TokenService } from 'src/app/services/token.service';
@@ -17,7 +18,8 @@ export class PendingUsersComponent {
   constructor(private requestService: RequestService, 
     private tokenService: TokenService,
     private location: Location,
-    private teamService: TeamService){
+    private teamService: TeamService,
+    private notificationservice: NotificationService){
       this.loadRequests();
     }
 
@@ -35,7 +37,7 @@ export class PendingUsersComponent {
         this.teamService
         .join(new TeamRequest(team, user))
         .subscribe(() => {
-          console.log(`${user} joined the ${team}`);
+          this.notificationservice.memberJoined(user, team);
           this.loadRequests();
         }
         );
@@ -57,7 +59,7 @@ export class PendingUsersComponent {
     this.requestService
       .declineRequest(id)
       .subscribe(() => {
-        console.log("Request declined");
+        this.notificationservice.requestDeclined();
         this.loadRequests();
       });
   }
