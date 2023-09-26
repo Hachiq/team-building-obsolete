@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NewSalaryDto } from 'src/app/models/newSalaryDto';
 import { Stat } from 'src/app/models/stat';
+import { NotificationService } from 'src/app/services/notification.service';
 import { StatService } from 'src/app/services/stat.service';
 import { TokenService } from 'src/app/services/token.service';
 
@@ -18,7 +19,8 @@ export class StatPanelComponent {
 
   constructor(private route: ActivatedRoute,
     private statService: StatService,
-    private tokenService: TokenService) {
+    private tokenService: TokenService,
+    private notificationService: NotificationService) {
     this.loadStats();
   }
 
@@ -33,7 +35,7 @@ export class StatPanelComponent {
   setSalary(){
     this.newSalaryDto.username = this.user;
     this.statService.setSalary(this.newSalaryDto).subscribe(() => {
-      console.log("Success");
+      this.notificationService.salarySet(this.newSalaryDto.username, this.newSalaryDto.newSalary);
       this.loadStats();
     },
     (error) => {

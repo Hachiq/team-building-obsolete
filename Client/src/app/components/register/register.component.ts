@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-register',
@@ -13,11 +14,12 @@ export class RegisterComponent {
   errorMessage: string = '';
 
   constructor(private authService: AuthService,
-    private router: Router) { }
+    private router: Router,
+    private notificationService: NotificationService) { }
 
   register(){
     this.authService.register(this.user).subscribe(() => {
-      console.log('Success');
+      this.notificationService.userRegistered();
       this.router.navigate(['login']);
     },
     (error) => {

@@ -33,7 +33,19 @@ export class NotificationService {
     this.toastr.info(`1 day paid added for ${username}.`)
   }
 
+  salarySet(user: string, salary: number){
+    this.toastr.info(`Salary for ${user} was set to ${salary}`);
+  }
+
   memberJoined(user?: string, team?: string){
     this.toastr.info(`${user} joined the ${team}.`)
+  }
+
+  teamCreated(team?: string | null){
+    this.toastr.success(`Team ${team} was created.`)
+  }
+
+  userRegistered(){
+    this.toastr.success("You've registered successfully. Please, log in.")
   }
 }

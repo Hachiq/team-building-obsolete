@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { TeamRequest } from 'src/app/models/teamRequest';
+import { NotificationService } from 'src/app/services/notification.service';
 import { TeamService } from 'src/app/services/team.service';
 import { TokenService } from 'src/app/services/token.service';
 
@@ -15,12 +16,13 @@ export class TeamFormComponent {
 
   constructor(private teamService: TeamService, 
     private router: Router,
-    private tokenService: TokenService){}
+    private tokenService: TokenService,
+    private notificationService: NotificationService){}
 
     create(){
       this.request.user = this.tokenService.getUsernameFromToken();
       this.teamService.create(this.request).subscribe(() => {
-          console.log('Success');
+          this.notificationService.teamCreated(this.request.team);
           this.router.navigate(['panel']);
         },
         (error) => {
