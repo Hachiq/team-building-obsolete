@@ -50,7 +50,7 @@ export class NotificationService {
   }
 
   definedError(errorMessage: string){
-    this.toastr.error(errorMessage);
+    this.toastr.warning(errorMessage);
   }
 
   undefinedError(){
