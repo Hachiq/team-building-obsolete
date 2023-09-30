@@ -18,7 +18,6 @@ export class TeamPanelComponent {
   team: Team = new Team()
   members?: Member[];
   selectedMembers: Member[] = [];
-  errorMessage: string = '';
 
   constructor(private teamService: TeamService,
     private tokenService: TokenService,

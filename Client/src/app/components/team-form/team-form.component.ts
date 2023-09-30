@@ -12,7 +12,6 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class TeamFormComponent {
   request = new TeamRequest();
-  errorMessage: string = '';
 
   constructor(private teamService: TeamService, 
     private router: Router,
@@ -27,10 +26,10 @@ export class TeamFormComponent {
         },
         (error) => {
           if (error.status === 400){
-            this.errorMessage = error.error;
+            this.notificationService.definedError(error.error);
           }
           else {
-            this.errorMessage = 'Undefined error. Please, try again later.'
+            this.notificationService.undefinedError();
           }
         }
       );

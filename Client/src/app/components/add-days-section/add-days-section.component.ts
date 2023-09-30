@@ -30,12 +30,10 @@ export class AddDaysSectionComponent {
       },
       (error) => {
         if (error.status === 404){
-          console.log(error.message);
-          
+          this.notificationService.definedError(error.error);
         }
         else {
-          console.log("Undefined error. Please, try again later.");
-          ;
+          this.notificationService.undefinedError();
         }
       }
       )

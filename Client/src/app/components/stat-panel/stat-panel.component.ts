@@ -15,7 +15,6 @@ export class StatPanelComponent {
   stat: Stat = new Stat();
   user: string = '';
   newSalaryDto: NewSalaryDto = new NewSalaryDto();
-  errorMessage: string = '';
 
   constructor(private route: ActivatedRoute,
     private statService: StatService,
@@ -40,10 +39,10 @@ export class StatPanelComponent {
     },
     (error) => {
       if (error.status === 404){
-        this.errorMessage = error.message;
+        this.notificationService.definedError(error.error);
       }
       else {
-        this.errorMessage = "Undefined error. Please, try again later.";
+        this.notificationService.undefinedError();
       }
     })
   }

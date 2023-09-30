@@ -38,14 +38,22 @@ export class NotificationService {
   }
 
   memberJoined(user?: string, team?: string){
-    this.toastr.info(`${user} joined the ${team}.`)
+    this.toastr.info(`${user} joined the ${team}.`);
   }
 
   teamCreated(team?: string | null){
-    this.toastr.success(`Team ${team} was created.`)
+    this.toastr.success(`Team ${team} was created.`);
   }
 
   userRegistered(){
-    this.toastr.success("You've registered successfully. Please, log in.")
+    this.toastr.success("You've registered successfully. Please, log in.");
+  }
+
+  definedError(errorMessage: string){
+    this.toastr.error(errorMessage);
+  }
+
+  undefinedError(){
+    this.toastr.error("Undefined error. Please, try again later.");
   }
 }

@@ -44,10 +44,10 @@ export class PendingUsersComponent {
       },
       (error) => {
         if (error.status === 400){
-          console.log(error.error);
+          this.notificationservice.definedError(error.error);
         }
         else {
-          console.log('Undefined error. Please, try again later.');
+          this.notificationservice.undefinedError();
         }
       }
     );
