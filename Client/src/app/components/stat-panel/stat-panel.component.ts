@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NewSalaryDto } from 'src/app/models/newSalaryDto';
@@ -17,6 +18,7 @@ export class StatPanelComponent {
   newSalaryDto: NewSalaryDto = new NewSalaryDto();
 
   constructor(private route: ActivatedRoute,
+    private location: Location,
     private statService: StatService,
     private tokenService: TokenService,
     private notificationService: NotificationService) {
@@ -49,5 +51,9 @@ export class StatPanelComponent {
 
   userIsChief(): boolean{
     return this.tokenService.userIsInRole('Chief');
+  }
+
+  back(){
+    this.location.back();
   }
 }
