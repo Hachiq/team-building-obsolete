@@ -12,10 +12,9 @@ namespace Api.Services.StatService
             _db = db;
         }
 
-        public async Task<Stat> GetStatByUserAsync(User user)
+        public async Task<Stat> GetStatByUserIdAsync(int id)
         {
-            return user.Stat;
-            //return await _db.Stats.FirstOrDefaultAsync(s => s.Id == user.Id);
+            return await _db.Stats.FirstOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task<IEnumerable<User>> GetUserStatsAsync()

@@ -3,8 +3,6 @@ using Api.Models;
 using Api.Services.StatService;
 using Api.Services.TeamService;
 using Api.Services.UserService;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.JsonPatch.Internal;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers

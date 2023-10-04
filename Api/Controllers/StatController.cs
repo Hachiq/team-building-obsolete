@@ -34,7 +34,7 @@ namespace Api.Controllers
             {
                 return NotFound("User not found");
             }
-            var stat = await _statService.GetStatByUserAsync(user);
+            var stat = await _statService.GetStatByUserIdAsync(user.Id);
             if (stat is null)
             {
                 return NotFound("Stat not found");

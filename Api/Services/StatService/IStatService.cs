@@ -5,7 +5,7 @@ namespace Api.Services.StatService
     public interface IStatService
     {
         Task<IEnumerable<User>> GetUserStatsAsync();
-        Task<Stat> GetStatByUserAsync(User user);
+        Task<Stat> GetStatByUserIdAsync(int id);
         Task SetSalaryAsync(User user, int newSalary);
         Task AddDayWorkedAsync(User user);
         Task AddDayPaidAsync(User user);
