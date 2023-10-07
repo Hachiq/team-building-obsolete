@@ -20,5 +20,13 @@
         {
             StatusId = 2;
         }
+        public bool IsDeclined()
+        {
+            return StatusId == 3;
+        }
+        public bool IsAccepted()
+        {
+            return StatusId == 2;
+        }
     }
 }

@@ -42,7 +42,7 @@ namespace Api.Services.RequestService
 
         public bool AlreadyProcessed(Request request)
         {
-            return request.StatusId == 2 || request.StatusId == 3;
+            return request.IsAccepted() || request.IsDeclined();
         }
 
         public async Task DeclineRequestAsync(Request request)

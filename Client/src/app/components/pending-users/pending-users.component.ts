@@ -61,6 +61,14 @@ export class PendingUsersComponent {
       .subscribe(() => {
         this.notificationservice.requestDeclined();
         this.loadRequests();
+      },
+      (error) => {
+        if (error.status === 400){
+          this.notificationservice.definedError(error.error);
+        }
+        else {
+          this.notificationservice.undefinedError();
+        }
       });
   }
 
