@@ -27,6 +27,7 @@ namespace Api.Services.RequestService
                 .Where(request => request.TeamId == teamId)
                 .Include(request => request.User)
                 .Include(request => request.Team)
+                .Include(request => request.Status)
                 .ToListAsync();
         }
         public async Task CreateRequestAsync(int userId, int teamId)
@@ -41,18 +42,18 @@ namespace Api.Services.RequestService
 
         public bool AlreadyProcessed(Request request)
         {
-            return request.Status == "Accepted" || request.Status == "Declined";
+            return request.StatusId == 2 || request.StatusId == 3;
         }
 
         public async Task DeclineRequestAsync(Request request)
         {
-            request.Status = "Declined";
+            request.Decline();
             _db.Update(request);
             await _db.SaveChangesAsync();
         }
         public async Task AcceptRequestAsync(Request request)
         {
-            request.Status = "Accepted";
+            request.Accept();
             _db.Update(request);
             await _db.SaveChangesAsync();
         }

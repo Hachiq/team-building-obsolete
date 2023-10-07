@@ -12,5 +12,6 @@ namespace Api.Data
         public DbSet<Role> Roles => Set<Role>();
         public DbSet<Team> Teams => Set<Team>();
         public DbSet<Request> Requests => Set<Request>();
+        public DbSet<Status> Statuses => Set<Status>();
     }
 }

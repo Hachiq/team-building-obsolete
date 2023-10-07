@@ -24,7 +24,7 @@
                 <td>{{ request.user?.lastName }}</td>
                 <td>{{ request.user?.email }}</td>
                 <td>{{ request.requestDate | date: 'long' }}</td>
-                <td [ngClass]="{'text-danger': request.status === 'Declined', 'text-info': request.status === 'Pending', 'text-success': request.status === 'Accepted'}">{{ request.status }}</td>
+                <td [ngClass]="{'text-danger': request.statusId === 3, 'text-info': request.statusId === 1, 'text-success': request.statusId === 2}">{{ request.status?.name }}</td>
                 <td>
                     <div class="btn-group" role="group">
                         <button (click)="accept(request.id, request.user?.username, request.team?.name)" class="btn btn-success" style="width: 100px; margin-left: 20px;">Accept</button>
