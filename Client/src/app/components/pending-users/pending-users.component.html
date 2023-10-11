@@ -9,11 +9,11 @@
         <thead class="table-dark">
             <tr>
                 <th scope="col" style="width: 50px; text-align: center;">#</th>
-                <th scope="col">First name</th>
-                <th scope="col">Last name</th>
+                <th class="sortable" scope="col" (click)="sortOn('firstName')">First name</th>
+                <th class="sortable" scope="col">Last name</th>
                 <th scope="col">Email</th>
-                <th scope="col">Date of request</th>
-                <th scope="col">Status</th>
+                <th class="sortable" scope="col">Date of request</th>
+                <th class="sortable" scope="col">Status</th>
                 <th style="width: 240px;"></th>
             </tr>
         </thead>

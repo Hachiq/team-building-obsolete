@@ -13,7 +13,7 @@ import { TokenService } from 'src/app/services/token.service';
   styleUrls: ['./pending-users.component.scss']
 })
 export class PendingUsersComponent {
-  requests?: Request[];
+  requests: Request[] | any[] = [];
 
   constructor(private requestService: RequestService, 
     private tokenService: TokenService,
@@ -70,6 +70,10 @@ export class PendingUsersComponent {
           this.notificationservice.undefinedError();
         }
       });
+  }
+
+  sortOn(property: string): void{
+    this.requests.sort((a, b) => (a[property] > b[property] ? 1 : -1));
   }
 
   getDisplayNumber(index: number): number {
