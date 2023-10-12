@@ -51,8 +51,6 @@ export class PendingUsersComponent {
         }
       }
     );
-
-    
   }
   
   decline(id: number){
@@ -73,7 +71,12 @@ export class PendingUsersComponent {
   }
 
   sortOn(property: string): void{
-    this.requests.sort((a, b) => (a[property] > b[property] ? 1 : -1));
+    // this.requests.sort((a, b) => (a[property] > b[property] ? 1 : -1));
+    this.requests.sort((a,b) => {
+      if(a[property] < b[property]) { return -1; }
+      if(a[property] > b[property]) { return 1; }
+      return 0;
+    })
   }
 
   getDisplayNumber(index: number): number {
