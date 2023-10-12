@@ -46,7 +46,7 @@ export class NotificationService {
   }
 
   userRegistered(){
-    this.toastr.success("You've registered successfully. Please, log in.");
+    this.toastr.success("You've registered successfully.");
   }
 
   definedError(errorMessage: string){
