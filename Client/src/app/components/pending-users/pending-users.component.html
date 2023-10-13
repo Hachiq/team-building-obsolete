@@ -9,8 +9,7 @@
         <thead class="table-dark">
             <tr>
                 <th scope="col" style="width: 50px; text-align: center;">#</th>
-                <th scope="col">First name</th>
-                <th scope="col">Last name</th>
+                <th scope="col">Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Date of request</th>
                 <th class="sortable" scope="col" (click)="sortOn('statusId')">
@@ -24,8 +23,7 @@
         <tbody>
             <tr *ngFor="let request of requests; let i = index">
                 <th scope="row" style="text-align: center;">{{ getDisplayNumber(i) }}</th>
-                <td>{{ request.user?.firstName }}</td>
-                <td>{{ request.user?.lastName }}</td>
+                <td>{{ request.user?.firstName }} {{ request.user?.lastName }}</td>
                 <td>{{ request.user?.email }}</td>
                 <td>{{ request.requestDate | date: 'long' }}</td>
                 <td [ngClass]="{'text-danger': request.statusId === 3, 'text-info': request.statusId === 1, 'text-success': request.statusId === 2}">{{ request.status?.name }}</td>
