@@ -9,11 +9,15 @@
         <thead class="table-dark">
             <tr>
                 <th scope="col" style="width: 50px; text-align: center;">#</th>
-                <th class="sortable" scope="col" (click)="sortOn('user?.firstName')">First name</th>
-                <th class="sortable" scope="col" (click)="sortOn('.user?.lastName')">Last name</th>
+                <th scope="col">First name</th>
+                <th scope="col">Last name</th>
                 <th scope="col">Email</th>
-                <th class="sortable" scope="col" (click)="sortOn('requestDate')">Date of request</th>
-                <th class="sortable" scope="col" (click)="sortOn('statusId')">Status</th>
+                <th scope="col">Date of request</th>
+                <th class="sortable" scope="col" (click)="sortOn('statusId')">
+                    Status
+                    <i [hidden]="isAscending" class="fa fa-fw fa-sort-desc"></i>
+                    <i [hidden]="!isAscending" class="fa fa-fw fa-sort-asc"></i>
+                </th>
                 <th style="width: 240px;"></th>
             </tr>
         </thead>

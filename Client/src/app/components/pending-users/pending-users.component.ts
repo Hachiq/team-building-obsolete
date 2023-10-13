@@ -14,6 +14,7 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class PendingUsersComponent {
   requests: Request[] | any[] = [];
+  isAscending = false;
 
   constructor(private requestService: RequestService, 
     private tokenService: TokenService,
@@ -26,7 +27,10 @@ export class PendingUsersComponent {
   loadRequests(){
     this.requestService
       .getRequests(this.tokenService.getTeamIdFromToken())
-      .subscribe((result: Request[]) => this.requests = result)
+      .subscribe((result: Request[]) => {
+        this.requests = result
+        this.sortOn('statusId');
+      })
   }
 
   accept(id: number, user?: string, team?: string){
@@ -71,10 +75,14 @@ export class PendingUsersComponent {
   }
 
   sortOn(property: string): void{
-    // this.requests.sort((a, b) => (a[property] > b[property] ? 1 : -1));
+    this.isAscending = !this.isAscending;
+    const order = this.isAscending ? 1 : -1;
+
+    // this.requests.sort((a, b) => (a[property] > b[property] ? order : -order));
+
     this.requests.sort((a,b) => {
-      if(a[property] < b[property]) { return -1; }
-      if(a[property] > b[property]) { return 1; }
+      if(a[property] > b[property]) { return order; }
+      if(a[property] < b[property]) { return -order; }
       return 0;
     })
   }
