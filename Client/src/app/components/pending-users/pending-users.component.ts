@@ -14,7 +14,9 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class PendingUsersComponent {
   requests: Request[] | any[] = [];
+  filteredRequests: Request[] | any[] = [];
   isAscending = false;
+  pendingOnly = false;
 
   constructor(private requestService: RequestService, 
     private tokenService: TokenService,
@@ -30,6 +32,7 @@ export class PendingUsersComponent {
       .subscribe((result: Request[]) => {
         this.requests = result
         this.sortOn('statusId');
+        this.filterRequests();
       })
   }
 
@@ -85,6 +88,14 @@ export class PendingUsersComponent {
       if(a[property] < b[property]) { return -order; }
       return 0;
     })
+  }
+
+  filterRequests() {
+    if (this.pendingOnly) {
+      this.filteredRequests = this.requests.filter((request) => request.statusId === 1);
+    } else {
+      this.filteredRequests = this.requests;
+    }
   }
 
   getDisplayNumber(index: number): number {
